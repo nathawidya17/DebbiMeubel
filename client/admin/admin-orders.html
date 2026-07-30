@@ -351,7 +351,7 @@ function openModal(orderId) {
         ? `<p class="text-sm text-stone-400 italic p-3">Konfigurasi standar</p>`
         : rows.map(([k,v])=>`<div class="flex justify-between px-4 py-2.5 border-b border-stone-100 last:border-0"><span class="text-xs text-stone-400">${cfgKeys[k]||k}</span><span class="text-xs font-medium text-stone-800">${v}${['width','height','depth'].includes(k)?' cm':''}</span></div>`).join('');
     const pw=document.getElementById('modalProofWrap');
-    if(order.paymentProof){pw.classList.remove('hidden');document.getElementById('modalProofLink').href=`http://localhost:3001/uploads/${order.paymentProof}`;}else pw.classList.add('hidden');
+   if(order.paymentProof){pw.classList.remove('hidden');document.getElementById('modalProofLink').href=`${API.split('/api')[0]}/uploads/${order.paymentProof}`;}else pw.classList.add('hidden');
 
     document.getElementById('orderModal').classList.add('open');
     document.body.style.overflow='hidden';
