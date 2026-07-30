@@ -264,134 +264,110 @@ input[type=range]::-webkit-slider-thumb:active { transform: scale(1.2); }
 
 <!-- ── SIDE PANEL ─────────────────────────── -->
 <div id="side-panel">
-    <div class="flex flex-col px-5 md:px-6 pt-5 md:pt-6 gap-0">
-        <!-- Nama produk -->
-        <div class="pb-4 md:pb-5 border-b border-stone-200 flex-shrink-0">
-            <p class="text-[0.6rem] tracking-[0.14em] uppercase text-stone-400 mb-1">Kustomisasi</p>
-            <h1 id="uiProductName" class="font-serif font-light text-xl md:text-2xl leading-tight text-stone-900">Memuat...</h1>
-        </div>
-        <!-- Scroll area -->
-        <div class="flex-1 pb-10" style="scrollbar-width:thin;scrollbar-color:#d0ceca transparent;">
+    <!-- NAMA PRODUK (Bagian ini diam / sticky di atas) -->
+    <div class="px-5 md:px-6 pt-5 md:pt-6 pb-4 md:pb-5 border-b border-stone-200 flex-shrink-0">
+        <p class="text-[0.6rem] tracking-[0.14em] uppercase text-stone-400 mb-1">Kustomisasi</p>
+        <h1 id="uiProductName" class="font-serif font-light text-xl md:text-2xl leading-tight text-stone-900">Memuat...</h1>
+    </div>
 
-            <!-- DIMENSI -->
-            <section id="dimensionSection" class="py-4 md:py-5 border-b border-stone-200">
-                <p class="text-[0.6rem] tracking-[0.14em] uppercase text-stone-400 mb-3 md:mb-4 flex items-center gap-1.5">
-                    <span class="w-1 h-1 rounded-full bg-rust inline-block"></span>
-                    Dimensi Ukuran
-                </p>
-                <div class="space-y-4 md:space-y-5">
-                    <div>
-                        <div class="flex items-center justify-between mb-2">
-                            <label class="text-xs uppercase tracking-widest text-stone-400">Lebar</label>
-                            <span class="text-sm font-light text-stone-900 tabular-nums"><span id="widthValue">113</span> cm</span>
-                        </div>
-                        <input type="range" id="width" min="113" max="300" step="10" value="113" class="w-full cursor-pointer">
+    <!-- AREA SCROLL (Bagian ini yang otomatis memunculkan scrollbar) -->
+    <div class="flex-1 overflow-y-auto px-5 md:px-6 pb-8" style="scrollbar-width:thin;scrollbar-color:#d0ceca transparent;">
+        <!-- DIMENSI -->
+        <section id="dimensionSection" class="py-4 md:py-5 border-b border-stone-200">
+            <p class="text-[0.6rem] tracking-[0.14em] uppercase text-stone-400 mb-3 md:mb-4 flex items-center gap-1.5">
+                <span class="w-1 h-1 rounded-full bg-rust inline-block"></span>
+                Dimensi Ukuran
+            </p>
+            <div class="space-y-4 md:space-y-5">
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <label class="text-xs uppercase tracking-widest text-stone-400">Lebar</label>
+                        <span class="text-sm font-light text-stone-900 tabular-nums"><span id="widthValue">113</span> cm</span>
                     </div>
-                    <div>
-                        <div class="flex items-center justify-between mb-2">
-                            <label class="text-xs uppercase tracking-widest text-stone-400">Tinggi</label>
-                            <span class="text-sm font-light text-stone-900 tabular-nums"><span id="heightValue">113</span> cm</span>
-                        </div>
-                        <input type="range" id="height" min="113" max="300" step="10" value="113" class="w-full cursor-pointer">
+                    <input type="range" id="width" min="113" max="300" step="10" value="113" class="w-full cursor-pointer">
+                </div>
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <label class="text-xs uppercase tracking-widest text-stone-400">Tinggi</label>
+                        <span class="text-sm font-light text-stone-900 tabular-nums"><span id="heightValue">113</span> cm</span>
                     </div>
-                    <div>
-                        <div class="flex items-center justify-between mb-2">
-                            <label class="text-xs uppercase tracking-widest text-stone-400">Kedalaman</label>
-                            <span class="text-sm font-light text-stone-900 tabular-nums"><span id="depthValue">40</span> cm</span>
-                        </div>
-                        <input type="range" id="depth" min="20" max="100" step="10" value="40" class="w-full cursor-pointer">
+                    <input type="range" id="height" min="113" max="300" step="10" value="113" class="w-full cursor-pointer">
+                </div>
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <label class="text-xs uppercase tracking-widest text-stone-400">Kedalaman</label>
+                        <span class="text-sm font-light text-stone-900 tabular-nums"><span id="depthValue">40</span> cm</span>
                     </div>
+                    <input type="range" id="depth" min="20" max="100" step="10" value="40" class="w-full cursor-pointer">
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- KONFIGURASI -->
-            <section id="rackLayoutControls" class="py-4 md:py-5 border-b border-stone-200">
-                <p class="text-[0.6rem] tracking-[0.14em] uppercase text-stone-400 mb-3 md:mb-4 flex items-center gap-1.5">
-                    <span class="w-1 h-1 rounded-full bg-rust inline-block"></span>
-                    Konfigurasi Komponen
-                </p>
-                <div id="layoutGrid" class="grid grid-cols-2 gap-2.5"></div>
-            </section>
+        <!-- KONFIGURASI -->
+        <section id="rackLayoutControls" class="py-4 md:py-5 border-b border-stone-200">
+            <p class="text-[0.6rem] tracking-[0.14em] uppercase text-stone-400 mb-3 md:mb-4 flex items-center gap-1.5">
+                <span class="w-1 h-1 rounded-full bg-rust inline-block"></span>
+                Konfigurasi Komponen
+            </p>
+            <div id="layoutGrid" class="grid grid-cols-2 gap-2.5"></div>
+        </section>
 
-            <!-- FINISHING -->
-            <section class="py-4 md:py-5 border-b border-stone-200">
-                <p class="text-[0.6rem] tracking-[0.14em] uppercase text-stone-400 mb-3 md:mb-4 flex items-center gap-1.5">
-                    <span class="w-1 h-1 rounded-full bg-rust inline-block"></span>
-                    Finishing
-                </p>
+        <!-- FINISHING -->
+        <section class="py-4 md:py-5 border-b border-stone-200">
+            <p class="text-[0.6rem] tracking-[0.14em] uppercase text-stone-400 mb-3 md:mb-4 flex items-center gap-1.5">
+                <span class="w-1 h-1 rounded-full bg-rust inline-block"></span>
+                Finishing
+            </p>
 
-                <!-- Toggle PVC / HPL -->
-                <div class="flex mb-3 border border-stone-200">
-                    <button id="btnPVC" onclick="setFinishingType('pvc')"
-                        class="flex-1 py-2.5 text-[0.62rem] tracking-widest uppercase font-medium transition-colors bg-stone-900 text-white border-r border-stone-700">
-                        PVC Sheet
-                    </button>
-                    <button id="btnHPL" onclick="setFinishingType('hpl')"
-                        class="flex-1 py-2.5 text-[0.62rem] tracking-widest uppercase font-medium transition-colors bg-white text-stone-500 hover:text-stone-900">
-                        HPL Premium
-                    </button>
-                </div>
+            <div class="flex mb-3 border border-stone-200">
+                <button id="btnPVC" onclick="setFinishingType('pvc')" class="flex-1 py-2.5 text-[0.62rem] tracking-widest uppercase font-medium transition-colors bg-stone-900 text-white border-r border-stone-700">PVC Sheet</button>
+                <button id="btnHPL" onclick="setFinishingType('hpl')" class="flex-1 py-2.5 text-[0.62rem] tracking-widest uppercase font-medium transition-colors bg-white text-stone-500 hover:text-stone-900">HPL Premium</button>
+            </div>
 
-                <!-- PVC options: 3 kolom di mobile, 4 di desktop -->
-                <div id="pvcOptions" class="grid grid-cols-3 md:grid-cols-4 gap-1.5">
-                    <button onclick="selectTexture('pvc','./models/tekstur/warna putih.jpg','Putih',this)"
-                        class="texture-btn flex flex-col items-center gap-1 p-1 border border-stone-200 hover:border-stone-900 transition-colors bg-stone-50">
-                        <img src="./models/tekstur/warna putih.jpg" class="w-full h-10 md:h-8 object-cover"/>
-                        <span class="text-[0.55rem] uppercase tracking-wider text-stone-500">Putih</span>
-                    </button>
-                    <button onclick="selectTexture('pvc','./models/tekstur/warna abu.avif','Abu',this)"
-                        class="texture-btn flex flex-col items-center gap-1 p-1 border border-stone-200 hover:border-stone-900 transition-colors bg-stone-50">
-                        <img src="./models/tekstur/warna abu.avif" class="w-full h-10 md:h-8 object-cover"/>
-                        <span class="text-[0.55rem] uppercase tracking-wider text-stone-500">Abu</span>
-                    </button>
-                    <button onclick="selectTexture('pvc','./models/tekstur/kayu terang.jpg','Kayu Terang',this)"
-                        class="texture-btn flex flex-col items-center gap-1 p-1 border border-stone-200 hover:border-stone-900 transition-colors bg-stone-50">
-                        <img src="./models/tekstur/kayu terang.jpg" class="w-full h-10 md:h-8 object-cover"/>
-                        <span class="text-[0.55rem] uppercase tracking-wider text-stone-500">Kayu Terang</span>
-                    </button>
-                    <button onclick="selectTexture('pvc','./models/tekstur/kayunetral.jpg','Kayu',this)"
-                        class="texture-btn flex flex-col items-center gap-1 p-1 border border-stone-200 hover:border-stone-900 transition-colors bg-stone-50">
-                        <img src="./models/tekstur/kayunetral.jpg" class="w-full h-10 md:h-8 object-cover"/>
-                        <span class="text-[0.55rem] uppercase tracking-wider text-stone-500">Kayu</span>
-                    </button>
-                    <button onclick="selectTexture('pvc','./models/tekstur/kayu abu copy.png','Kayu Abu',this)"
-                        class="texture-btn flex flex-col items-center gap-1 p-1 border border-stone-200 hover:border-stone-900 transition-colors bg-stone-50">
-                        <img src="./models/tekstur/kayu abu.webp" class="w-full h-10 md:h-8 object-cover"/>
-                        <span class="text-[0.55rem] uppercase tracking-wider text-stone-500">Kayu Abu</span>
-                    </button>
-                </div>
+            <div id="pvcOptions" class="grid grid-cols-3 md:grid-cols-4 gap-1.5">
+                <button onclick="selectTexture('pvc','./models/tekstur/warna putih.jpg','Putih',this)" class="texture-btn flex flex-col items-center gap-1 p-1 border border-stone-200 hover:border-stone-900 transition-colors bg-stone-50">
+                    <img src="./models/tekstur/warna putih.jpg" class="w-full h-10 md:h-8 object-cover"/>
+                    <span class="text-[0.55rem] uppercase tracking-wider text-stone-500">Putih</span>
+                </button>
+                <button onclick="selectTexture('pvc','./models/tekstur/warna abu.avif','Abu',this)" class="texture-btn flex flex-col items-center gap-1 p-1 border border-stone-200 hover:border-stone-900 transition-colors bg-stone-50">
+                    <img src="./models/tekstur/warna abu.avif" class="w-full h-10 md:h-8 object-cover"/>
+                    <span class="text-[0.55rem] uppercase tracking-wider text-stone-500">Abu</span>
+                </button>
+                <button onclick="selectTexture('pvc','./models/tekstur/kayu terang.jpg','Kayu Terang',this)" class="texture-btn flex flex-col items-center gap-1 p-1 border border-stone-200 hover:border-stone-900 transition-colors bg-stone-50">
+                    <img src="./models/tekstur/kayu terang.jpg" class="w-full h-10 md:h-8 object-cover"/>
+                    <span class="text-[0.55rem] uppercase tracking-wider text-stone-500">Kayu Terang</span>
+                </button>
+                <button onclick="selectTexture('pvc','./models/tekstur/kayunetral.jpg','Kayu',this)" class="texture-btn flex flex-col items-center gap-1 p-1 border border-stone-200 hover:border-stone-900 transition-colors bg-stone-50">
+                    <img src="./models/tekstur/kayunetral.jpg" class="w-full h-10 md:h-8 object-cover"/>
+                    <span class="text-[0.55rem] uppercase tracking-wider text-stone-500">Kayu</span>
+                </button>
+                <button onclick="selectTexture('pvc','./models/tekstur/kayu abu copy.png','Kayu Abu',this)" class="texture-btn flex flex-col items-center gap-1 p-1 border border-stone-200 hover:border-stone-900 transition-colors bg-stone-50">
+                    <img src="./models/tekstur/kayu abu.webp" class="w-full h-10 md:h-8 object-cover"/>
+                    <span class="text-[0.55rem] uppercase tracking-wider text-stone-500">Kayu Abu</span>
+                </button>
+            </div>
 
-                <!-- HPL options -->
-                <div id="hplOptions" class="grid grid-cols-3 md:grid-cols-4 gap-1.5 hidden">
-                    <button onclick="selectTexture('hpl','./models/tekstur/oak_putih.jpg','Oak Putih',this)"
-                        class="texture-btn flex flex-col items-center gap-1 p-1 border border-stone-200 hover:border-stone-900 transition-colors bg-stone-50">
-                        <img src="./models/tekstur/oak_putih.jpg" class="w-full h-10 md:h-8 object-cover"/>
-                        <span class="text-[0.55rem] uppercase tracking-wider text-stone-500">Oak Putih</span>
-                    </button>
-                    <button onclick="selectTexture('hpl','./models/tekstur/oak_abucorak.png','Abu Terang',this)"
-                        class="texture-btn flex flex-col items-center gap-1 p-1 border border-stone-200 hover:border-stone-900 transition-colors bg-stone-50">
-                        <img src="./models/tekstur/oak_abucorak.png" class="w-full h-10 md:h-8 object-cover"/>
-                        <span class="text-[0.55rem] uppercase tracking-wider text-stone-500">Abu Terang</span>
-                    </button>
-                    <button onclick="selectTexture('hpl','./models/tekstur/oak_gelap.png','Abu Gelap',this)"
-                        class="texture-btn flex flex-col items-center gap-1 p-1 border border-stone-200 hover:border-stone-900 transition-colors bg-stone-50">
-                        <img src="./models/tekstur/oak_gelap.png" class="w-full h-10 md:h-8 object-cover"/>
-                        <span class="text-[0.55rem] uppercase tracking-wider text-stone-500">Abu Gelap</span>
-                    </button>
-                    <button onclick="selectTexture('hpl','./models/tekstur/mewah.webp','Motif Marmer',this)"
-                        class="texture-btn flex flex-col items-center gap-1 p-1 border border-stone-200 hover:border-stone-900 transition-colors bg-stone-50">
-                        <img src="./models/tekstur/mewah.webp" class="w-full h-10 md:h-8 object-cover"/>
-                        <span class="text-[0.55rem] uppercase tracking-wider text-stone-500">Motif Marmer</span>
-                    </button>
-                </div>
-            </section>
-
-        </div>
-        <!-- end scroll -->
-
+            <div id="hplOptions" class="grid grid-cols-3 md:grid-cols-4 gap-1.5 hidden">
+                <button onclick="selectTexture('hpl','./models/tekstur/oak_putih.jpg','Oak Putih',this)" class="texture-btn flex flex-col items-center gap-1 p-1 border border-stone-200 hover:border-stone-900 transition-colors bg-stone-50">
+                    <img src="./models/tekstur/oak_putih.jpg" class="w-full h-10 md:h-8 object-cover"/>
+                    <span class="text-[0.55rem] uppercase tracking-wider text-stone-500">Oak Putih</span>
+                </button>
+                <button onclick="selectTexture('hpl','./models/tekstur/oak_abucorak.png','Abu Terang',this)" class="texture-btn flex flex-col items-center gap-1 p-1 border border-stone-200 hover:border-stone-900 transition-colors bg-stone-50">
+                    <img src="./models/tekstur/oak_abucorak.png" class="w-full h-10 md:h-8 object-cover"/>
+                    <span class="text-[0.55rem] uppercase tracking-wider text-stone-500">Abu Terang</span>
+                </button>
+                <button onclick="selectTexture('hpl','./models/tekstur/oak_gelap.png','Abu Gelap',this)" class="texture-btn flex flex-col items-center gap-1 p-1 border border-stone-200 hover:border-stone-900 transition-colors bg-stone-50">
+                    <img src="./models/tekstur/oak_gelap.png" class="w-full h-10 md:h-8 object-cover"/>
+                    <span class="text-[0.55rem] uppercase tracking-wider text-stone-500">Abu Gelap</span>
+                </button>
+                <button onclick="selectTexture('hpl','./models/tekstur/mewah.webp','Motif Marmer',this)" class="texture-btn flex flex-col items-center gap-1 p-1 border border-stone-200 hover:border-stone-900 transition-colors bg-stone-50">
+                    <img src="./models/tekstur/mewah.webp" class="w-full h-10 md:h-8 object-cover"/>
+                    <span class="text-[0.55rem] uppercase tracking-wider text-stone-500">Motif Marmer</span>
+                </button>
+            </div>
+        </section>
     </div>
 </div>
-
 <!-- ── PRICE CTA (sticky di mobile, inline di desktop) ── -->
 <div class="price-cta">
     <div class="flex items-center justify-between gap-4 md:block">
