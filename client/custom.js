@@ -690,7 +690,7 @@ async function loadProduct() {
     let productData = null;
     try {
         if (slug) {
-            const res = await fetch(`http://localhost:3001/api/products/${slug}`);
+            const res = await fetch(`https://debbimeubel.up.railway.app/api/products/${slug}`);
             if (res.ok) { productData = await res.json(); 
                 basePriceFromDB = productData.basePrice; 
                 currentProduct = productData;
