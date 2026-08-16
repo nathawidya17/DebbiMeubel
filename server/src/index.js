@@ -5,7 +5,7 @@ require('dotenv').config();
 
 const app = express();
 
-const allowedOrigins = ['http://127.0.0.1:5500', 'https://debbimeubel.up.railway.app','https://custom-furniture-apps.vercel.app']; // Tambahkan domain Railway lu di sini
+const allowedOrigins = ['http://127.0.0.1:5500', 'https://debbimeubel.up.railway.app','https://debbimeubel.online', 'https://www.debbimeubel.online']; // Tambahkan domain Railway lu di sini
 
 app.use(cors({ 
     origin: function (origin, callback) {
