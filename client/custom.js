@@ -1049,22 +1049,27 @@ function updatePriceUI() {
     // 1. KALKULASI HARGA KOMPONEN & MULTIPLIER
     // ==========================================
     if (productType === 'hiro') {
+        const totalBaru = numDrawer + numLaci;
+        const totalStandar = 3; // Standar Hiro: 2 drawer + 1 laci
         const extraDrawer = Math.max(0, numDrawer - 2); 
         const extraLaci = Math.max(0, numLaci - 1);     
         finalPrice += (extraDrawer * 40000) + (extraLaci * 25000);
-        sizeMultiplier = Math.max(1, (numDrawer + numLaci) / 3);
+        sizeMultiplier = totalBaru / totalStandar; // Rumus: Komponen Baru / Standar
 
     } else if (productType === 'hiro_rak2drawer') {
+        const totalBaru = numRak2Drawer + numRak2Laci;
+        const totalStandar = 4; // Standar Hiro Rak: 2 drawer + 2 laci/rak
         const extraDrawer = Math.max(0, numRak2Drawer - 2); 
         const extraRak = Math.max(0, numRak2Laci - 2);      
         finalPrice += (extraDrawer * 50000) + (extraRak * 35000);
-        sizeMultiplier = Math.max(1, (numRak2Drawer + numRak2Laci) / 4);
+        sizeMultiplier = totalBaru / totalStandar;
 
     } else if (productType === 'lemari_kabinet') {
-        const totalBoxes = rackCols * rackRows;
-        const extra = Math.max(0, totalBoxes - 6); 
+        const totalBaru = rackCols * rackRows;
+        const totalStandar = 6; // Standar Kabinet: 2 col * 3 row
+        const extra = Math.max(0, totalBaru - totalStandar); 
         finalPrice += extra * 80000;
-        sizeMultiplier = Math.max(1, totalBoxes / 6);
+        sizeMultiplier = totalBaru / totalStandar;
 
     } else if (productType === 'rack') {
         const defaultCm = 113, defaultDepthCm = 40;
@@ -1075,25 +1080,27 @@ function updatePriceUI() {
         const stepsW = Math.max(0, Math.floor((wCm - defaultCm) / 10));
         const stepsH = Math.max(0, Math.floor((hCm - defaultCm) / 10));
         const stepsD = Math.max(0, Math.floor((dCm - defaultDepthCm) / 10));
-        
         finalPrice += (stepsW + stepsH + stepsD) * 20000;
         
-        const totalRak = rackCols * rackRows;
-        const extraRak = Math.max(0, totalRak - 9); 
+        const totalBaru = rackCols * rackRows;
+        const totalStandar = 9; // Standar Rak: 3 col * 3 row
+        const extraRak = Math.max(0, totalBaru - totalStandar); 
         finalPrice += extraRak * 25000;
-        sizeMultiplier = Math.max(1, totalRak / 9);
+        sizeMultiplier = totalBaru / totalStandar;
 
     } else if (productType === 'lemari') {
-        const totalRak = lemariConfig.leftRak + lemariConfig.rightRakTop + lemariConfig.rightRakBottom;
-        const extra = Math.max(0, totalRak - 5);
+        const totalBaru = lemariConfig.leftRak + lemariConfig.rightRakTop + lemariConfig.rightRakBottom;
+        const totalStandar = 3; // Standar: 1 rak kiri + 1 rak atas + 1 rak bawah
+        const extra = Math.max(0, totalBaru - 5);
         finalPrice += extra * 25000;
-        sizeMultiplier = 3; 
+        sizeMultiplier = totalBaru / totalStandar; 
 
     } else if (productType === 'lemari2pintubiasa') {
-        const totalRak = lemari2Config.kiriRak + lemari2Config.kananRak + lemari2Config.kananDrawer;
-        const extra = Math.max(0, totalRak - 5);
+        const totalBaru = lemari2Config.kiriRak + lemari2Config.kananRak + lemari2Config.kananDrawer;
+        const totalStandar = 3; // Standar: 0 rak kiri + 2 rak kanan + 1 drawer
+        const extra = Math.max(0, totalBaru - 5);
         finalPrice += extra * 25000;
-        sizeMultiplier = 3; 
+        sizeMultiplier = totalBaru / totalStandar; 
     }
 
     // ==========================================
@@ -1122,9 +1129,8 @@ function updatePriceUI() {
             baseFinishingPrice = 150000; 
             break;
             
-        // TIER 4: HPL Premium
-        case 'Kayu Mewah': // Di HTML nama parameternya 'Kayu Mewah' walau teksnya 'Motif Marmer'
-        
+        // TIER 4: HPL Premium (PERBAIKAN TYPO "Motif Marmer")
+        case 'Motif Marmer': 
             baseFinishingPrice = 250000; 
             break;
             
@@ -1132,7 +1138,7 @@ function updatePriceUI() {
             baseFinishingPrice = 0;
     }
 
-    // Hitung total harga finishing berdasarkan ukuran produk
+    // Hitung total harga finishing berdasarkan Rasio (Harga Dasar * Pengali)
     finalPrice += Math.round(baseFinishingPrice * sizeMultiplier);
 
     // ==========================================
