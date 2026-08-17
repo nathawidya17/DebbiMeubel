@@ -509,8 +509,8 @@ function buildLemari2(states) {
                 n.material = n.material.clone(); n.material.side = THREE.DoubleSide;
                 n.castShadow = n.receiveShadow = true;
 
-                if (currentTexture) { 
-                    n.material.map = currentTexture; 
+                if (window.currentTexture) { 
+                    n.material.map = window.currentTexture; 
                     n.material.color.set('#ffffff'); 
                     n.material.roughness = 0.5; 
                 }
