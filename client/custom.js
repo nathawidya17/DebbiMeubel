@@ -965,13 +965,25 @@ function setupEventListeners() {
         }
         container.style.cursor = isHover ? 'pointer' : 'default';
     });
-    window.addEventListener('pointerdown', () => {
+   window.addEventListener('pointerdown', (event) => {
         if (!rackGroup) return;
+        
+        // Update koordinat persis di titik layar yang disentuh/diklik
+        const rect = renderer.domElement.getBoundingClientRect();
+        mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
         raycaster.setFromCamera(mouse, camera);
         const intersects = raycaster.intersectObjects(rackGroup.children, true);
         if (intersects.length > 0) {
             let t = intersects[0].object;
-            while (t && t !== rackGroup) { if (t.userData?.canOpen) { t.userData.isOpen = !t.userData.isOpen; break; } t = t.parent; }
+            while (t && t !== rackGroup) { 
+                if (t.userData?.canOpen) { 
+                    t.userData.isOpen = !t.userData.isOpen; 
+                    break; 
+                } 
+                t = t.parent; 
+            }
         }
     });
 }
