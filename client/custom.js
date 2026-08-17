@@ -965,15 +965,40 @@ function setupEventListeners() {
         }
         container.style.cursor = isHover ? 'pointer' : 'default';
     });
-    window.addEventListener('pointerdown', () => {
-        if (!rackGroup) return;
-        raycaster.setFromCamera(mouse, camera);
-        const intersects = raycaster.intersectObjects(rackGroup.children, true);
-        if (intersects.length > 0) {
-            let t = intersects[0].object;
-            while (t && t !== rackGroup) { if (t.userData?.canOpen) { t.userData.isOpen = !t.userData.isOpen; break; } t = t.parent; }
+   // Variabel untuk deteksi tap vs drag
+let pointerDownX = 0, pointerDownY = 0;
+
+container.addEventListener('pointerdown', (e) => {
+    pointerDownX = e.clientX;
+    pointerDownY = e.clientY;
+});
+
+container.addEventListener('pointerup', (e) => {
+    if (!rackGroup) return;
+
+    const dx = Math.abs(e.clientX - pointerDownX);
+    const dy = Math.abs(e.clientY - pointerDownY);
+
+    // Hanya proses jika ini tap (jari tidak bergerak), bukan drag/rotate
+    if (dx > 8 || dy > 8) return;
+
+    const rect = container.getBoundingClientRect();
+    mouse.x =  ((e.clientX - rect.left) / rect.width)  * 2 - 1;
+    mouse.y = -((e.clientY - rect.top)  / rect.height) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObjects(rackGroup.children, true);
+    if (intersects.length > 0) {
+        let t = intersects[0].object;
+        while (t && t !== rackGroup) {
+            if (t.userData?.canOpen) {
+                t.userData.isOpen = !t.userData.isOpen;
+                break;
+            }
+            t = t.parent;
         }
-    });
+    }
+});
 }
 
 // 3. Fungsi Apply Material 
