@@ -1244,7 +1244,7 @@ window.currentTexture = null;
 window.selectTexture = function(type, path, name, btn) {
     window.currentFinishing = name; // tetap pakai nama internal untuk kalkulasi harga
     
-    // ✅ Simpan LABEL TAMPILAN ke localStorage (bukan nama internal)
+    //  Simpan LABEL TAMPILAN ke localStorage 
     const displayLabel = FINISHING_DISPLAY_LABELS[name] || name;
     localStorage.setItem('selectedFinishingName', displayLabel);
 

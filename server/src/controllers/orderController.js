@@ -30,7 +30,10 @@ const upload = multer({
 });
 
 const isValidImageSignature = (filePath) => {
+    // Membaca 8 byte pertama dari file fisik
     const buffer = fs.readFileSync(filePath, { encoding: null, flag: 'r' }).subarray(0, 8);
+
+    // Mengecek struktur Hexadecimal (Magic Numbers)
     return (buffer[0] === 0x89 && buffer[1] === 0x50 && buffer[2] === 0x4e && buffer[3] === 0x47) || 
            (buffer[0] === 0xff && buffer[1] === 0xd8 && buffer[2] === 0xff);
 };
@@ -111,7 +114,7 @@ const uploadPayment = async (req, res) => {
         const filePath = path.join('uploads', req.file.filename);
 
         if (!isValidImageSignature(filePath)) {
-            fs.unlinkSync(filePath);
+            fs.unlinkSync(filePath); // Menghapus file secara paksa
             await prisma.order.delete({ where: { id: parseInt(req.params.id) } });
             return res.status(400).json({ error: 'File tidak valid atau rusak.' });
         }
