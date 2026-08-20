@@ -82,7 +82,7 @@ const updateOrderStatus = async (req, res) => {
       const mapPesan = {
         WAITING_APPROVAL: 'sedang *DIVERIFIKASI* oleh admin.',
         APPROVED:         '*DITERIMA* & pembayaran valid.',
-        IN_PRODUCTION:    'sedang *DALAM PROSES PRODUKSI* oleh tukang kayu kami.',
+        IN_PRODUCTION:    'sedang *DALAM PROSES PRODUKSI* oleh tukang kami.',
         DONE:             '*SELESAI* diproduksi & sedang dalam pengiriman!',
         REJECTED:         '*DITOLAK*. Mohon hubungi admin untuk informasi lebih lanjut.'
       };
