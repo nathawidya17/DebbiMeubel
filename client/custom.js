@@ -85,8 +85,8 @@ async function initHiro(loader) {
              numDrawer = parseInt(e.target.value) || 0;  // ambil nilai baru dari input, ubah jadi angka
              document.getElementById('drawerVal').innerText = numDrawer;  // update teks penampil angka di UI
              updateDisplay(); };
-        document.getElementById('inputLaci').oninput = (e) => { n
-            umLaci = parseInt(e.target.value) || 0;
+        document.getElementById('inputLaci').oninput = (e) => { 
+            numLaci = parseInt(e.target.value) || 0;
              document.getElementById('laciVal').innerText = numLaci; 
              updateDisplay(); };
         updateDisplay(); focusCamera(9);
@@ -1069,7 +1069,7 @@ function updatePriceUI() {
         const totalStandar = 6; // Standar Kabinet: 2 col * 3 row
         const extra = Math.max(0, totalBaru - totalStandar); 
         finalPrice += extra * 80000;
-        sizeMultiplier = totalBaru / totalStandar;
+        sizeMultiplier = 1;
 
     } else if (productType === 'rack') {
         const defaultCm = 113, defaultDepthCm = 40;
@@ -1095,14 +1095,14 @@ function updatePriceUI() {
         const totalStandar = 3; // Standar: 1 rak kiri + 1 rak atas + 1 rak bawah
         const extra = Math.max(0, totalBaru - 5);
         finalPrice += extra * 25000;
-        sizeMultiplier = totalBaru / totalStandar; 
+        sizeMultiplier = 1; 
 
     } else if (productType === 'lemari2pintubiasa') {
         const totalBaru = lemari2Config.kiriRak + lemari2Config.kananRak + lemari2Config.kananDrawer;
         const totalStandar = 3; // Standar: 0 rak kiri + 2 rak kanan + 1 drawer
         const extra = Math.max(0, totalBaru - 5);
         finalPrice += extra * 25000;
-        sizeMultiplier = totalBaru / totalStandar; 
+        sizeMultiplier = 1; 
     }
 
     // ==========================================
