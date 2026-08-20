@@ -583,9 +583,9 @@ function buildStandard() {
     modelOriginalBox.getSize(size); // ambil ukuran asli dari model
 
     // hitung skala untuk menyesuaikan model dengan ukuran yang diinginkan
-    const sX = customConfig.width / size.x;
-    const sY = customConfig.height / size.y;
-    const sZ = customConfig.depth / size.z;
+    const sX = customConfig.width / size.x; //lebar
+    const sY = customConfig.height / size.y; //tinggi
+    const sZ = customConfig.depth / size.z; //kedalaman
     if (productType === 'rack') {
         const offX = (rackCols > 1) ? 0.042 : 0, // atur jarak kanan kiri   
               offY = (rackRows > 1) ? 0.095 : 0; // atur jarak atas bawah
@@ -1076,7 +1076,6 @@ function updatePriceUI() {
         const wCm = Math.round(customConfig.width * 100);
         const hCm = Math.round(customConfig.height * 100);
         const dCm = Math.round(customConfig.depth * 100);
-        
         const stepsW = Math.max(0, Math.floor((wCm - defaultCm) / 10));
         const stepsH = Math.max(0, Math.floor((hCm - defaultCm) / 10));
         const stepsD = Math.max(0, Math.floor((dCm - defaultDepthCm) / 10));
@@ -1084,8 +1083,11 @@ function updatePriceUI() {
         
         const totalBaru = rackCols * rackRows;
         const totalStandar = 9; // Standar Rak: 3 col * 3 row
-        const extraRak = Math.max(0, totalBaru - totalStandar); 
-        finalPrice += extraRak * 25000;
+        
+        // KODE YANG DIPERBAIKI: Menghapus Math.max agar harga bisa berkurang
+        const selisihRak = totalBaru - totalStandar; 
+        finalPrice += selisihRak * 25000; 
+        
         sizeMultiplier = totalBaru / totalStandar;
 
     } else if (productType === 'lemari') {
