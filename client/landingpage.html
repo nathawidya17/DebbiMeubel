@@ -6,735 +6,199 @@
 <title>Debbi Meubel Garut — Furnitur Custom, Gratis Ongkir Se-Garut Kota</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    cream: '#F6F3EE',
+                    warm: '#EDE8DF',
+                    ink: '#1C1A17',
+                    gold: '#B8974A',
+                    'gold-lt': '#D4AE6A',
+                    rust: '#C8602A',
+                    border: 'rgba(28,26,23,.12)',
+                },
+                fontFamily: {
+                    display: ['"Playfair Display"', 'Georgia', 'serif'],
+                    body: ['"DM Sans"', 'sans-serif'],
+                },
+                keyframes: {
+                    fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                    slideUp: { '0%': { opacity: '0', transform: 'translateY(40px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+                    shimmer: { '0%': { backgroundPosition: '200% 0' }, '100%': { backgroundPosition: '-200% 0' } },
+                    ticker: { 'from': { transform: 'translateX(0)' }, 'to': { transform: 'translateX(-50%)' } }
+                },
+                animation: {
+                    fadeIn: 'fadeIn .35s ease',
+                    slideUp: 'slideUp .4s cubic-bezier(.22,.68,0,1.2)',
+                    shimmer: 'shimmer 2.5s linear infinite',
+                    ticker: 'ticker 22s linear infinite',
+                }
+            }
+        }
+    }
+</script>
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --cream:   #F6F3EE;
-  --warm:    #EDE8DF;
-  --ink:     #1C1A17;
-  --ink60:   rgba(28,26,23,.6);
-  --ink30:   rgba(28,26,23,.3);
-  --gold:    #B8974A;
-  --gold-lt: #D4AE6A;
-  --rust:    #C8602A;
-  --white:   #FFFFFF;
-  --border:  rgba(28,26,23,.12);
-
-  --display: 'Playfair Display', Georgia, serif;
-  --body:    'DM Sans', sans-serif;
-  --r: 4px;
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: var(--body);
-  background: var(--cream);
-  color: var(--ink);
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-
-/* ── POPUP ──────────────────────────────────────── */
-#popup-overlay {
-  position: fixed; inset: 0; z-index: 9999;
-  background: rgba(28,26,23,.65);
-  backdrop-filter: blur(6px);
-  display: flex; align-items: center; justify-content: center;
-  padding: 20px;
-  animation: fadeIn .35s ease;
-}
-@keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
-
-#popup-card {
-  background: var(--white);
-  width: 100%; max-width: 520px;
-  position: relative;
-  overflow: hidden;
-  animation: slideUp .4s cubic-bezier(.22,.68,0,1.2);
-}
-@keyframes slideUp { from { opacity:0; transform:translateY(40px) } to { opacity:1; transform:translateY(0) } }
-
-.popup-stripe {
-  height: 5px;
-  background: linear-gradient(90deg, var(--gold), var(--rust), var(--gold-lt));
-  background-size: 200% 100%;
-  animation: shimmer 2.5s linear infinite;
-}
-@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
-
-.popup-body { padding: 36px 36px 32px; }
-
-.popup-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: #FFF7E6; border: 1px solid #F0D898;
-  color: var(--gold); border-radius: 100px;
-  font-size: .65rem; font-weight: 600; letter-spacing: .1em;
-  text-transform: uppercase; padding: 5px 12px;
-  margin-bottom: 18px;
-}
-.popup-badge svg { width:14px; height:14px; }
-
-.popup-title {
-  font-family: var(--display);
-  font-size: clamp(1.6rem, 5vw, 2rem);
-  font-weight: 700; line-height: 1.2;
-  color: var(--ink); margin-bottom: 6px;
-}
-.popup-title em { color: var(--rust); font-style: italic; }
-
-.popup-sub {
-  font-size: .88rem; color: var(--ink60);
-  line-height: 1.6; margin-bottom: 24px;
-}
-
-.popup-perks {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 10px; margin-bottom: 28px;
-}
-.perk {
-  background: var(--cream);
-  border: 1px solid var(--border);
-  padding: 14px;
-  display: flex; flex-direction: column; gap: 6px;
-}
-.perk-icon {
-  width: 32px; height: 32px;
-  background: var(--ink); border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-.perk-icon svg { width:16px; height:16px; fill: var(--white); }
-.perk-label { font-size: .72rem; font-weight: 600; color: var(--ink); letter-spacing:.02em; }
-.perk-desc  { font-size: .68rem; color: var(--ink60); line-height:1.4; }
-
-.popup-cta {
-  display: block; width: 100%;
-  background: var(--ink);
-  color: var(--white);
-  padding: 15px;
-  font-family: var(--body);
-  font-size: .78rem; font-weight: 500;
-  letter-spacing: .1em; text-transform: uppercase;
-  text-align: center; text-decoration: none;
-  border: none; cursor: pointer;
-  transition: background .2s;
-}
-.popup-cta:hover { background: var(--rust); }
-
-.popup-skip {
-  display: block; text-align: center; margin-top: 14px;
-  font-size: .72rem; color: var(--ink30);
-  cursor: pointer; background: none; border: none;
-  font-family: var(--body); transition: color .15s;
-}
-.popup-skip:hover { color: var(--ink); }
-
-#popup-close {
-  position: absolute; top: 14px; right: 14px;
-  width: 28px; height: 28px;
-  background: var(--warm); border: none; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--ink60); border-radius: 50%; transition: background .15s;
-}
-#popup-close:hover { background: var(--warm); color: var(--ink); }
-
-/* ── HEADER ─────────────────────────────────────── */
-header {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(246,243,238,.95);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-}
-.header-inner {
-  max-width: 1200px; margin: 0 auto;
-  padding: 0 32px; height: 64px;
-  display: flex; align-items: center; justify-content: space-between;
-}
-.logo {
-  font-family: var(--display);
-  font-size: 1.4rem; font-weight: 700;
-  color: var(--ink); text-decoration: none;
-}
-.logo span { color: var(--rust); }
-
-.header-nav { display: flex; align-items: center; gap: 28px; }
-.header-nav a {
-  font-size: .82rem; color: var(--ink60);
-  text-decoration: none; transition: color .15s;
-}
-.header-nav a:hover { color: var(--ink); }
-
-.header-cta {
-  background: var(--ink); color: var(--white);
-  padding: 9px 20px;
-  font-size: .75rem; font-weight: 500;
-  letter-spacing: .08em; text-transform: uppercase;
-  text-decoration: none; transition: background .2s;
-}
-.header-cta:hover { background: var(--rust); }
-
-/* ── HERO ───────────────────────────────────────── */
-.hero {
-  max-width: 1200px; margin: 0 auto;
-  padding: 80px 32px 64px;
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 60px; align-items: center;
-}
-.hero-eyebrow {
-  display: flex; align-items: center; gap: 8px;
-  font-size: .7rem; font-weight: 600;
-  letter-spacing: .12em; text-transform: uppercase;
-  color: var(--rust); margin-bottom: 20px;
-}
-.hero-eyebrow::before {
-  content: ''; display: block;
-  width: 24px; height: 1.5px; background: var(--rust);
-}
-.hero-title {
-  font-family: var(--display);
-  font-size: clamp(2.4rem, 4.5vw, 3.4rem);
-  font-weight: 700; line-height: 1.1;
-  color: var(--ink); margin-bottom: 20px;
-}
-.hero-title em { color: var(--rust); font-style: italic; }
-.hero-desc {
-  font-size: .95rem; color: var(--ink60);
-  line-height: 1.75; margin-bottom: 36px;
-  max-width: 440px;
-}
-
-.hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-.btn-primary {
-  background: var(--ink); color: var(--white);
-  padding: 14px 28px;
-  font-size: .78rem; font-weight: 500;
-  letter-spacing: .08em; text-transform: uppercase;
-  text-decoration: none; transition: background .2s;
-  display: inline-flex; align-items: center; gap: 8px;
-}
-.btn-primary:hover { background: var(--rust); }
-.btn-secondary {
-  color: var(--ink); font-size: .82rem;
-  text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
-  border-bottom: 1px solid var(--ink30); padding-bottom: 2px;
-  transition: border-color .15s, color .15s;
-}
-.btn-secondary:hover { color: var(--rust); border-color: var(--rust); }
-
-/* Hero promo pill */
-.hero-promo-pill {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: linear-gradient(135deg, var(--gold), #8B6914);
-  color: var(--white);
-  padding: 8px 16px; margin-bottom: 28px;
-  font-size: .7rem; font-weight: 600;
-  letter-spacing: .08em; text-transform: uppercase;
-}
-.hero-promo-pill svg { width:14px; height:14px; fill: currentColor; flex-shrink:0; }
-
-/* Hero visual */
-.hero-visual {
-  position: relative; aspect-ratio: 4/5;
-  background: var(--warm);
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden;
-}
-.hero-visual-img {
-  width: 100%; height: 100%; object-fit: cover;
-}
-.hero-visual-placeholder {
-  width: 100%; height: 100%;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 12px; color: var(--ink30);
-}
-.hero-visual-placeholder svg { width:64px; height:64px; }
-.hero-visual-placeholder span { font-size:.8rem; letter-spacing:.06em; text-transform:uppercase; }
-
-.hero-stat-strip {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  background: var(--ink);
-  display: grid; grid-template-columns: 1fr 1fr 1fr;
-  padding: 0;
-}
-.hero-stat {
-  padding: 16px; text-align: center;
-  border-right: 1px solid rgba(255,255,255,.1);
-}
-.hero-stat:last-child { border-right: none; }
-.hero-stat-num {
-  font-family: var(--display);
-  font-size: 1.5rem; font-weight: 700;
-  color: var(--white); display: block;
-}
-.hero-stat-label {
-  font-size: .62rem; color: rgba(255,255,255,.5);
-  letter-spacing: .08em; text-transform: uppercase;
-}
-
-/* ── PROMO BANNER ───────────────────────────────── */
-.promo-banner {
-  background: var(--ink); color: var(--white);
-  overflow: hidden; position: relative;
-}
-.promo-banner-inner {
-  max-width: 1200px; margin: 0 auto;
-  padding: 48px 32px;
-  display: grid; grid-template-columns: 1fr auto;
-  gap: 40px; align-items: center;
-}
-.promo-tag {
-  display: inline-block;
-  background: var(--gold);
-  color: var(--ink);
-  font-size: .62rem; font-weight: 700;
-  letter-spacing: .12em; text-transform: uppercase;
-  padding: 4px 10px; margin-bottom: 12px;
-}
-.promo-title {
-  font-family: var(--display);
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
-  font-weight: 700; line-height: 1.15;
-  margin-bottom: 12px;
-}
-.promo-title em { color: var(--gold); font-style: italic; }
-.promo-desc { font-size: .88rem; color: rgba(255,255,255,.65); line-height: 1.6; }
-
-.promo-cards {
-  display: flex; flex-direction: column; gap: 10px; min-width: 240px;
-}
-.promo-card {
-  background: rgba(255,255,255,.07);
-  border: 1px solid rgba(255,255,255,.12);
-  padding: 16px 18px;
-  display: flex; align-items: center; gap: 14px;
-}
-.promo-card-icon {
-  width: 36px; height: 36px;
-  background: var(--gold);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-.promo-card-icon svg { width:18px; height:18px; fill: var(--ink); }
-.promo-card-text strong { display:block; font-size:.82rem; color:var(--white); margin-bottom:2px; }
-.promo-card-text span  { font-size:.7rem; color:rgba(255,255,255,.5); }
-
-/* decorative circle */
-.promo-banner::before {
-  content: ''; position: absolute;
-  width: 400px; height: 400px;
-  border: 80px solid rgba(255,255,255,.03);
-  border-radius: 50%;
-  right: -100px; top: -100px;
-  pointer-events: none;
-}
-
-/* ── BENEFITS ───────────────────────────────────── */
-.section {
-  max-width: 1200px; margin: 0 auto;
-  padding: 72px 32px;
-}
-.section-eyebrow {
-  display: flex; align-items: center; gap: 8px;
-  font-size: .68rem; font-weight: 600;
-  letter-spacing: .14em; text-transform: uppercase;
-  color: var(--ink60); margin-bottom: 12px;
-}
-.section-eyebrow::before {
-  content:''; display:block; width:20px; height:1px; background:var(--ink30);
-}
-.section-title {
-  font-family: var(--display);
-  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
-  font-weight: 700; line-height: 1.2;
-  color: var(--ink); margin-bottom: 48px;
-  max-width: 480px;
-}
-.section-title em { color: var(--rust); font-style: italic; }
-
-.benefits-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 1px; background: var(--border);
-  border: 1px solid var(--border);
-}
-.benefit {
-  background: var(--white);
-  padding: 32px 28px;
-  transition: background .2s;
-}
-.benefit:hover { background: var(--cream); }
-.benefit-num {
-  font-family: var(--display);
-  font-size: 2rem; font-weight: 700;
-  color: var(--warm); /* intentionally light */
-  display: block; margin-bottom: 16px;
-}
-.benefit-title {
-  font-size: .95rem; font-weight: 600;
-  color: var(--ink); margin-bottom: 10px;
-}
-.benefit-desc { font-size: .82rem; color: var(--ink60); line-height: 1.65; }
-
-/* ── HOW IT WORKS ───────────────────────────────── */
-.how-bg { background: var(--warm); }
-.steps {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 0; position: relative;
-}
-.steps::before {
-  content: '';
-  position: absolute; top: 28px; left: 12.5%; right: 12.5%;
-  height: 1px; background: var(--border);
-  z-index: 0;
-}
-.step { padding: 0 20px; text-align: center; position: relative; z-index: 1; }
-.step-num {
-  width: 56px; height: 56px;
-  background: var(--ink); color: var(--white);
-  font-family: var(--display); font-size: 1.2rem; font-weight: 700;
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 20px;
-}
-.step-title { font-size: .88rem; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
-.step-desc  { font-size: .76rem; color: var(--ink60); line-height: 1.55; }
-
-/* ── PROMO TICKER ───────────────────────────────── */
-.ticker-wrap {
-  background: var(--gold);
-  overflow: hidden; padding: 12px 0;
-}
-.ticker-track {
-  display: flex; gap: 0;
-  animation: ticker 22s linear infinite;
-  white-space: nowrap;
-}
-@keyframes ticker {
-  from { transform: translateX(0) }
-  to   { transform: translateX(-50%) }
-}
-.ticker-item {
-  display: inline-flex; align-items: center; gap: 12px;
-  padding: 0 32px;
-  font-size: .72rem; font-weight: 700;
-  letter-spacing: .1em; text-transform: uppercase;
-  color: var(--ink);
-}
-.ticker-dot {
-  width: 5px; height: 5px;
-  background: var(--ink); border-radius: 50; opacity: .4;
-}
-
-/* ── TESTIMONIAL ────────────────────────────────── */
-.testimonials {
-  display: grid; grid-template-columns: repeat(3,1fr); gap: 20px;
-}
-.testimonial {
-  background: var(--white);
-  border: 1px solid var(--border);
-  padding: 28px;
-  transition: box-shadow .2s;
-}
-.testimonial:hover { box-shadow: 0 8px 32px rgba(28,26,23,.08); }
-.testimonial-stars { color: var(--gold); font-size: .9rem; margin-bottom: 14px; }
-.testimonial-text {
-  font-size: .85rem; color: var(--ink60);
-  line-height: 1.7; margin-bottom: 20px;
-  font-style: italic;
-}
-.testimonial-author { display: flex; align-items: center; gap: 10px; }
-.testimonial-avatar {
-  width: 36px; height: 36px;
-  background: var(--warm); border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--display); font-size: .9rem; font-weight: 700; color: var(--ink);
-}
-.testimonial-name { font-size: .82rem; font-weight: 600; color: var(--ink); }
-.testimonial-loc  { font-size: .7rem; color: var(--ink30); }
-
-/* ── CTA BAND ───────────────────────────────────── */
-.cta-band {
-  background: linear-gradient(135deg, var(--rust) 0%, #8B3A14 100%);
-  color: var(--white);
-}
-.cta-band-inner {
-  max-width: 1200px; margin: 0 auto;
-  padding: 72px 32px;
-  display: grid; grid-template-columns: 1fr auto;
-  gap: 40px; align-items: center;
-}
-.cta-band-title {
-  font-family: var(--display);
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-  font-weight: 700; line-height: 1.2; margin-bottom: 10px;
-}
-.cta-band-desc { font-size: .88rem; color: rgba(255,255,255,.7); line-height: 1.6; }
-.btn-white {
-  background: var(--white); color: var(--rust);
-  padding: 16px 32px; white-space: nowrap;
-  font-size: .78rem; font-weight: 600;
-  letter-spacing: .08em; text-transform: uppercase;
-  text-decoration: none; transition: opacity .2s;
-  display: inline-flex; align-items: center; gap: 8px;
-}
-.btn-white:hover { opacity: .9; }
-.btn-wa {
-  background: #25D366; color: var(--white);
-  padding: 16px 32px; white-space: nowrap;
-  font-size: .78rem; font-weight: 600;
-  letter-spacing: .08em; text-transform: uppercase;
-  text-decoration: none; margin-top: 10px;
-  display: inline-flex; align-items: center; gap: 8px;
-}
-.btn-wa:hover { background: #1ebe5c; }
-.cta-buttons { display: flex; flex-direction: column; gap: 10px; }
-
-/* ── FOOTER ─────────────────────────────────────── */
-footer {
-  background: var(--ink); color: rgba(255,255,255,.5);
-}
-.footer-inner {
-  max-width: 1200px; margin: 0 auto;
-  padding: 48px 32px 32px;
-  display: grid; grid-template-columns: 2fr 1fr 1fr;
-  gap: 48px;
-}
-.footer-brand-name {
-  font-family: var(--display);
-  font-size: 1.3rem; font-weight: 700;
-  color: var(--white); margin-bottom: 10px;
-}
-.footer-brand-name span { color: var(--gold); }
-.footer-brand-desc { font-size: .78rem; line-height: 1.65; max-width: 280px; }
-.footer-col-title {
-  font-size: .65rem; font-weight: 700;
-  letter-spacing: .12em; text-transform: uppercase;
-  color: var(--white); margin-bottom: 14px;
-}
-.footer-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-.footer-links li a {
-  font-size: .78rem; color: rgba(255,255,255,.45);
-  text-decoration: none; transition: color .15s;
-}
-.footer-links li a:hover { color: var(--white); }
-.footer-bottom {
-  max-width: 1200px; margin: 0 auto;
-  padding: 20px 32px;
-  border-top: 1px solid rgba(255,255,255,.08);
-  display: flex; align-items: center; justify-content: space-between;
-  font-size: .72rem;
-}
-
-/* ── SCROLL ANIMATION ───────────────────────────── */
-.reveal {
-  opacity: 0; transform: translateY(24px);
-  transition: opacity .6s ease, transform .6s ease;
-}
+/* Hanya tersisa 2 class ini karena ini butuh integrasi dengan Javascript Observer */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
-
-/* ── RESPONSIVE ─────────────────────────────────── */
-@media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; gap: 40px; }
-  .hero-visual { aspect-ratio: 16/9; }
-  .promo-banner-inner { grid-template-columns: 1fr; }
-  .benefits-grid { grid-template-columns: 1fr; }
-  .steps { grid-template-columns: 1fr 1fr; gap: 28px; }
-  .steps::before { display: none; }
-  .testimonials { grid-template-columns: 1fr; }
-  .cta-band-inner { grid-template-columns: 1fr; }
-  .footer-inner { grid-template-columns: 1fr; gap: 28px; }
-  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
-  .header-nav { display: none; }
-}
-@media (max-width: 600px) {
-  .hero { padding: 48px 20px 40px; }
-  .section { padding: 48px 20px; }
-  .popup-body { padding: 28px 24px 24px; }
-  .popup-perks { grid-template-columns: 1fr; }
-  .steps { grid-template-columns: 1fr; }
-  .header-inner { padding: 0 20px; }
-  .promo-banner-inner { padding: 40px 20px; }
-  .cta-band-inner { padding: 48px 20px; }
-  .footer-inner { padding: 40px 20px; }
-  .footer-bottom { padding: 20px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
-}
 </style>
 </head>
-<body>
+<body class="font-body bg-cream text-ink antialiased overflow-x-hidden">
 
 <!-- ═══════════════════════ POPUP ════════════════════════ -->
-<div id="popup-overlay" role="dialog" aria-modal="true" aria-label="Informasi Promosi">
-  <div id="popup-card">
-    <div class="popup-stripe"></div>
-    <button id="popup-close" aria-label="Tutup popup" onclick="closePopup()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14">
-        <path d="M18 6 6 18M6 6l12 12"/>
-      </svg>
+<div id="popup-overlay" role="dialog" aria-modal="true" aria-label="Informasi Promosi" class="fixed inset-0 z-[9999] bg-ink/65 backdrop-blur-sm flex items-center justify-center p-5 animate-fadeIn transition-opacity duration-300">
+  <div id="popup-card" class="bg-white w-full max-w-[520px] relative overflow-hidden animate-slideUp">
+    <!-- Stripe -->
+    <div class="h-[5px] bg-gradient-to-r from-gold via-rust to-gold-lt bg-[length:200%_100%] animate-shimmer"></div>
+    
+    <button id="popup-close" aria-label="Tutup popup" onclick="closePopup()" class="absolute top-3.5 right-3.5 w-7 h-7 bg-warm rounded-full flex items-center justify-center text-ink/60 hover:bg-warm hover:text-ink transition-colors">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-3.5 h-3.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
     </button>
 
-    <div class="popup-body">
-      <div class="popup-badge">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    <div class="p-7 md:p-9 pb-8">
+      <div class="inline-flex items-center gap-1.5 bg-[#FFF7E6] border border-[#F0D898] text-gold rounded-full text-[0.65rem] font-semibold tracking-[0.1em] uppercase py-1.5 px-3 mb-4">
+        <svg viewBox="0 0 24 24" fill="currentColor" class="w-3.5 h-3.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         Keunggulan Debbi Meubel
       </div>
 
-      <h2 class="popup-title">
+      <h2 class="font-display text-3xl md:text-[2rem] font-bold leading-[1.2] text-ink mb-1.5">
         Furnitur Custom,<br>
-        <em>Gratis Ongkir</em><br>
+        <em class="text-rust italic">Gratis Ongkir</em><br>
         Se-Garut Kota
       </h2>
-      <p class="popup-sub">
+      <p class="text-[0.88rem] text-ink/60 leading-[1.6] mb-6">
         Pesan furnitur sesuai ukuran ruangan Anda — sudah jadi, siap pakai, langsung diantar ke pintu rumah. Tanpa biaya pengiriman untuk wilayah Garut Kota.
       </p>
 
-      <div class="popup-perks">
-        <div class="perk">
-          <div class="perk-icon">
-            <svg viewBox="0 0 24 24"><path d="M1 3h15v13H1z M16 8h4l3 3v5h-7V8z M5.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3z M18.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg>
-          </div>
-          <div class="perk-label">Gratis Ongkir</div>
-          <div class="perk-desc">Seluruh wilayah Garut Kota, tanpa minimum pembelian</div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 mb-7">
+        <div class="bg-cream border border-border p-3.5 flex flex-col gap-1.5">
+          <div class="w-8 h-8 bg-ink rounded-full flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" class="w-4 h-4 fill-white"><path d="M1 3h15v13H1z M16 8h4l3 3v5h-7V8z M5.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3z M18.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg></div>
+          <div class="text-[0.72rem] font-semibold text-ink tracking-[0.02em]">Gratis Ongkir</div>
+          <div class="text-[0.68rem] text-ink/60 leading-[1.4]">Seluruh wilayah Garut Kota, tanpa minimum pembelian</div>
         </div>
-        <div class="perk">
-          <div class="perk-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5-10-5z M2 17l10 5 10-5 M2 12l10 5 10-5"/></svg>
-          </div>
-          <div class="perk-label">Sudah Jadi</div>
-          <div class="perk-desc">Produk tiba dalam kondisi siap pakai, tanpa perlu merakit</div>
+        <div class="bg-cream border border-border p-3.5 flex flex-col gap-1.5">
+          <div class="w-8 h-8 bg-ink rounded-full flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" class="w-4 h-4 fill-white"><path d="M12 2 2 7l10 5 10-5-10-5z M2 17l10 5 10-5 M2 12l10 5 10-5"/></svg></div>
+          <div class="text-[0.72rem] font-semibold text-ink tracking-[0.02em]">Sudah Jadi</div>
+          <div class="text-[0.68rem] text-ink/60 leading-[1.4]">Produk tiba dalam kondisi siap pakai, tanpa perlu merakit</div>
         </div>
-        <div class="perk">
-          <div class="perk-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 20h9 M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-          </div>
-          <div class="perk-label">Full Custom</div>
-          <div class="perk-desc">Ukuran, finishing, dan konfigurasi sesuai keinginan</div>
+        <div class="bg-cream border border-border p-3.5 flex flex-col gap-1.5">
+          <div class="w-8 h-8 bg-ink rounded-full flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" class="w-4 h-4 fill-white"><path d="M12 20h9 M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+          <div class="text-[0.72rem] font-semibold text-ink tracking-[0.02em]">Full Custom</div>
+          <div class="text-[0.68rem] text-ink/60 leading-[1.4]">Ukuran, finishing, dan konfigurasi sesuai keinginan</div>
         </div>
-        <div class="perk">
-          <div class="perk-icon">
-            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .98h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-          </div>
-          <div class="perk-label">Konsultasi WA</div>
-          <div class="perk-desc">Chat langsung dengan tim untuk diskusi desain</div>
+        <div class="bg-cream border border-border p-3.5 flex flex-col gap-1.5">
+          <div class="w-8 h-8 bg-ink rounded-full flex items-center justify-center shrink-0"><svg viewBox="0 0 24 24" class="w-4 h-4 fill-white"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .98h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div>
+          <div class="text-[0.72rem] font-semibold text-ink tracking-[0.02em]">Konsultasi WA</div>
+          <div class="text-[0.68rem] text-ink/60 leading-[1.4]">Chat langsung dengan tim untuk diskusi desain</div>
         </div>
       </div>
 
-      <a href="catalog.html" class="popup-cta" onclick="closePopup()">
+      <a href="catalog.html" class="block w-full bg-ink text-white py-3.5 text-center text-[0.78rem] font-medium tracking-[0.1em] uppercase transition-colors hover:bg-rust" onclick="closePopup()">
         Mulai Kustomisasi Sekarang →
       </a>
-      <button class="popup-skip" onclick="closePopup()">Lewati, lihat katalog dulu</button>
+      <button class="block text-center mt-3.5 text-[0.72rem] text-ink/30 hover:text-ink transition-colors font-body bg-transparent w-full" onclick="closePopup()">Lewati, lihat katalog dulu</button>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════ HEADER ═══════════════════════ -->
-<header>
-  <div class="header-inner">
-    <a href="landing.html" class="logo">Debbi <span>Meubel</span></a>
-    <nav class="header-nav">
-      <a href="#benefits">Keunggulan</a>
-      <a href="#cara-pesan">Cara Pesan</a>
-      <a href="catalog.html" class="header-cta">Lihat Katalog</a>
-    </nav>
-  </div>
-</header>
-
 <!-- ═══════════════════════ TICKER ═══════════════════════ -->
-<div class="ticker-wrap" aria-hidden="true">
-  <div class="ticker-track">
-    <!-- duplicated for seamless loop -->
-    <span class="ticker-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8zM5.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM18.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg>Gratis Ongkir Se-Garut Kota<span class="ticker-dot"></span></span>
-    <span class="ticker-item">Furnitur Sudah Jadi — Siap Pakai<span class="ticker-dot"></span></span>
-    <span class="ticker-item">Kustomisasi Ukuran, Finishing & Komponen<span class="ticker-dot"></span></span>
-    <span class="ticker-item">Simulator 3D Interaktif<span class="ticker-dot"></span></span>
-    <span class="ticker-item">Konsultasi Gratis via WhatsApp<span class="ticker-dot"></span></span>
-    <span class="ticker-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8zM5.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM18.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg>Gratis Ongkir Se-Garut Kota<span class="ticker-dot"></span></span>
-    <span class="ticker-item">Furnitur Sudah Jadi — Siap Pakai<span class="ticker-dot"></span></span>
-    <span class="ticker-item">Kustomisasi Ukuran, Finishing & Komponen<span class="ticker-dot"></span></span>
-    <span class="ticker-item">Simulator 3D Interaktif<span class="ticker-dot"></span></span>
-    <span class="ticker-item">Konsultasi Gratis via WhatsApp<span class="ticker-dot"></span></span>
+<div class="bg-gold overflow-hidden py-3" aria-hidden="true">
+  <div class="flex animate-ticker whitespace-nowrap">
+    <!-- Di-loop 2x biar mulus -->
+    <span class="inline-flex items-center gap-3 px-8 text-[0.72rem] font-bold tracking-[0.1em] uppercase text-ink"><svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8zM5.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM18.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg>Gratis Ongkir Se-Garut Kota<span class="w-1.5 h-1.5 bg-ink rounded-full opacity-40"></span></span>
+    <span class="inline-flex items-center gap-3 px-8 text-[0.72rem] font-bold tracking-[0.1em] uppercase text-ink">Furnitur Sudah Jadi — Siap Pakai<span class="w-1.5 h-1.5 bg-ink rounded-full opacity-40"></span></span>
+    <span class="inline-flex items-center gap-3 px-8 text-[0.72rem] font-bold tracking-[0.1em] uppercase text-ink">Kustomisasi Ukuran, Finishing & Komponen<span class="w-1.5 h-1.5 bg-ink rounded-full opacity-40"></span></span>
+    <span class="inline-flex items-center gap-3 px-8 text-[0.72rem] font-bold tracking-[0.1em] uppercase text-ink">Simulator 3D Interaktif<span class="w-1.5 h-1.5 bg-ink rounded-full opacity-40"></span></span>
+    <span class="inline-flex items-center gap-3 px-8 text-[0.72rem] font-bold tracking-[0.1em] uppercase text-ink">Konsultasi Gratis via WhatsApp<span class="w-1.5 h-1.5 bg-ink rounded-full opacity-40"></span></span>
+    
+    <span class="inline-flex items-center gap-3 px-8 text-[0.72rem] font-bold tracking-[0.1em] uppercase text-ink"><svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8zM5.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM18.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg>Gratis Ongkir Se-Garut Kota<span class="w-1.5 h-1.5 bg-ink rounded-full opacity-40"></span></span>
+    <span class="inline-flex items-center gap-3 px-8 text-[0.72rem] font-bold tracking-[0.1em] uppercase text-ink">Furnitur Sudah Jadi — Siap Pakai<span class="w-1.5 h-1.5 bg-ink rounded-full opacity-40"></span></span>
+    <span class="inline-flex items-center gap-3 px-8 text-[0.72rem] font-bold tracking-[0.1em] uppercase text-ink">Kustomisasi Ukuran, Finishing & Komponen<span class="w-1.5 h-1.5 bg-ink rounded-full opacity-40"></span></span>
+    <span class="inline-flex items-center gap-3 px-8 text-[0.72rem] font-bold tracking-[0.1em] uppercase text-ink">Simulator 3D Interaktif<span class="w-1.5 h-1.5 bg-ink rounded-full opacity-40"></span></span>
+    <span class="inline-flex items-center gap-3 px-8 text-[0.72rem] font-bold tracking-[0.1em] uppercase text-ink">Konsultasi Gratis via WhatsApp<span class="w-1.5 h-1.5 bg-ink rounded-full opacity-40"></span></span>
   </div>
 </div>
 
 <!-- ═══════════════════════ HERO ════════════════════════ -->
 <section>
-  <div class="hero">
-    <div class="hero-content reveal">
-      <div class="hero-eyebrow">Furnitur Custom Garut</div>
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 py-12 md:py-10 min-h-[calc(100vh-110px)] grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-[60px] items-center">
+    
+    <div class="reveal">
+      <div class="flex items-center gap-2 text-[0.7rem] font-semibold tracking-[0.12em] uppercase text-rust mb-5 before:content-[''] before:w-6 before:h-[1.5px] before:bg-rust">Furnitur Custom Garut</div>
 
-      <div class="hero-promo-pill">
-        <svg viewBox="0 0 24 24"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8zM5.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM18.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg>
+      <div class="inline-flex items-center gap-2 bg-gradient-to-br from-gold to-[#8B6914] text-white py-2 px-4 mb-7 text-[0.7rem] font-semibold tracking-[0.08em] uppercase">
+        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8zM5.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM18.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg>
         Gratis ongkir se-Garut Kota · Siap pakai
       </div>
 
-      <h1 class="hero-title">
-        Desain sendiri,<br>kami <em>wujudkan</em><br>untukmu.
+      <h1 class="font-display text-4xl md:text-[clamp(2.4rem,4.5vw,3.4rem)] font-bold leading-[1.1] text-ink mb-5">
+        Desain sendiri,<br>kami <em class="text-rust italic">wujudkan</em><br>untukmu.
       </h1>
-      <p class="hero-desc">
+      <p class="text-[0.95rem] text-ink/60 leading-[1.75] mb-9 max-w-[440px]">
         Konfigurasi furnitur impianmu lewat simulator 3D — pilih ukuran, finishing, dan susunan komponen. Produk datang sudah jadi, langsung diantar gratis ke wilayah Garut Kota.
       </p>
 
-      <div class="hero-actions">
-        <a href="catalog.html" class="btn-primary">
+      <div class="flex items-center gap-4 flex-wrap">
+        <a href="catalog.html" class="bg-ink text-white py-3.5 px-7 text-[0.78rem] font-medium tracking-[0.08em] uppercase inline-flex items-center gap-2 hover:bg-rust transition-colors">
           Mulai Kustomisasi
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <a href="#cara-pesan" class="btn-secondary">
+        <a href="#cara-pesan" class="text-ink text-[0.82rem] inline-flex items-center gap-1.5 pb-0.5 border-b border-ink/30 hover:text-rust hover:border-rust transition-colors">
           Cara pesan
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
         </a>
       </div>
     </div>
 
-<div class="fade-up relative" style="animation-delay:120ms">
-    <div class="bg-stone-200 overflow-hidden">
-        <img src="https://debbimeubel.up.railway.app/uploads/gambar landingpage.png" alt="Furnitur Debbi Meubel" class="w-full h-full object-cover">
+    <!-- HERO IMAGE FIX (Sesuai Permintaan di atas) -->
+    <div class="reveal relative flex items-center justify-center overflow-hidden rounded-3xl shadow-[0_20px_40px_rgba(28,26,23,0.1)] aspect-[16/11] scale-100 md:scale-[1.2] origin-center md:origin-right" style="transition-delay:.15s;">
+      <img src="https://debbimeubel.up.railway.app/uploads/gambar landingpage.png" alt="Furnitur Debbi Meubel" class="w-full h-full object-cover object-[right_center]">
     </div>
-</div>
+
   </div>
 </section>
 
 <!-- ═══════════════════════ PROMO BANNER ════════════════ -->
-<div class="promo-banner">
-  <div class="promo-banner-inner reveal">
+<div class="bg-ink text-white overflow-hidden relative">
+  <!-- Dekorasi Lingkaran -->
+  <div class="absolute w-[400px] h-[400px] border-[80px] border-white/5 rounded-full -right-[100px] -top-[100px] pointer-events-none"></div>
+  
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 py-12 md:py-12 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 items-center reveal relative z-10">
     <div>
-      <div class="promo-tag">Promo Unggulan</div>
-      <h2 class="promo-title">
-        Pesan furnitur,<br><em>kami antar gratis</em><br>sampai pintu rumah.
+      <div class="inline-block bg-gold text-ink text-[0.62rem] font-bold tracking-[0.12em] uppercase py-1 px-2.5 mb-3">Promo Unggulan</div>
+      <h2 class="font-display text-3xl md:text-[clamp(1.8rem,4vw,2.6rem)] font-bold leading-[1.15] mb-3">
+        Pesan furnitur,<br><em class="text-gold italic">kami antar gratis</em><br>sampai pintu rumah.
       </h2>
-      <p class="promo-desc">
+      <p class="text-[0.88rem] text-white/65 leading-[1.6]">
         Seluruh produk Debbi Meubel dikirim dalam kondisi sudah jadi dan siap pakai — tidak perlu rakit sendiri. Gratis ongkos kirim untuk wilayah Garut Kota.
       </p>
     </div>
-    <div class="promo-cards">
-      <div class="promo-card">
-        <div class="promo-card-icon">
-          <svg viewBox="0 0 24 24"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8zM5.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM18.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg>
-        </div>
-        <div class="promo-card-text">
-          <strong>Gratis Ongkir</strong>
-          <span>Seluruh wilayah Garut Kota</span>
-        </div>
-      </div>
-      <div class="promo-card">
-        <div class="promo-card-icon">
-          <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
-        </div>
-        <div class="promo-card-text">
-          <strong>Produk Sudah Jadi</strong>
-          <span>Langsung pakai, tanpa rakit</span>
+    
+    <div class="flex flex-col gap-2.5 min-w-full md:min-w-[240px]">
+      <div class="bg-white/5 border border-white/10 p-4 flex items-center gap-3.5">
+        <div class="w-9 h-9 bg-gold flex items-center justify-center shrink-0"><svg class="w-4.5 h-4.5 fill-ink" viewBox="0 0 24 24"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8zM5.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM18.5 19a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg></div>
+        <div>
+          <strong class="block text-[0.82rem] text-white mb-0.5 font-semibold">Gratis Ongkir</strong>
+          <span class="text-[0.7rem] text-white/50">Seluruh wilayah Garut Kota</span>
         </div>
       </div>
-      <div class="promo-card">
-        <div class="promo-card-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div class="bg-white/5 border border-white/10 p-4 flex items-center gap-3.5">
+        <div class="w-9 h-9 bg-gold flex items-center justify-center shrink-0"><svg class="w-4.5 h-4.5 fill-ink" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg></div>
+        <div>
+          <strong class="block text-[0.82rem] text-white mb-0.5 font-semibold">Produk Sudah Jadi</strong>
+          <span class="text-[0.7rem] text-white/50">Langsung pakai, tanpa rakit</span>
         </div>
-        <div class="promo-card-text">
-          <strong>Garansi Kualitas</strong>
-          <span>Material terpilih, pengerjaan rapi</span>
+      </div>
+      <div class="bg-white/5 border border-white/10 p-4 flex items-center gap-3.5">
+        <div class="w-9 h-9 bg-gold flex items-center justify-center shrink-0"><svg class="w-4.5 h-4.5 fill-ink" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div>
+          <strong class="block text-[0.82rem] text-white mb-0.5 font-semibold">Garansi Kualitas</strong>
+          <span class="text-[0.7rem] text-white/50">Material terpilih, pengerjaan rapi</span>
         </div>
       </div>
     </div>
@@ -742,91 +206,96 @@ footer {
 </div>
 
 <!-- ═══════════════════════ BENEFITS ════════════════════ -->
-<section id="benefits" class="section">
-  <div class="section-eyebrow reveal">Kenapa Debbi Meubel</div>
-  <h2 class="section-title reveal" style="transition-delay:.1s">
-    Lebih dari sekadar <em>furnitur</em>
+<section id="benefits" class="max-w-[1200px] mx-auto px-6 md:px-8 py-16 md:py-20">
+  <div class="reveal flex items-center gap-2 text-[0.68rem] font-semibold tracking-[0.14em] uppercase text-ink/60 mb-3 before:content-[''] before:block before:w-5 before:h-px before:bg-ink/30">Kenapa Debbi Meubel</div>
+  <h2 class="reveal font-display text-3xl md:text-[clamp(1.8rem,3.5vw,2.4rem)] font-bold leading-[1.2] text-ink mb-12 max-w-[480px]" style="transition-delay:.1s">
+    Lebih dari sekadar <em class="text-rust italic">furnitur</em>
   </h2>
-  <div class="benefits-grid reveal" style="transition-delay:.2s">
-    <div class="benefit">
-      <span class="benefit-num">01</span>
-      <div class="benefit-title">Simulator 3D Interaktif</div>
-      <p class="benefit-desc">Lihat dan putar model furniturmu secara nyata sebelum memesan. Buka-tutup pintu, geser laci — rasakan langsung hasilnya.</p>
+  
+  <div class="reveal grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border" style="transition-delay:.2s">
+    <div class="bg-white p-8 hover:bg-cream transition-colors">
+      <span class="font-display text-3xl font-bold text-warm block mb-4">01</span>
+      <div class="text-[0.95rem] font-semibold text-ink mb-2.5">Simulator 3D Interaktif</div>
+      <p class="text-[0.82rem] text-ink/60 leading-[1.65]">Lihat dan putar model furniturmu secara nyata sebelum memesan. Buka-tutup pintu, geser laci — rasakan langsung hasilnya.</p>
     </div>
-    <div class="benefit">
-      <span class="benefit-num">02</span>
-      <div class="benefit-title">Kustomisasi Penuh</div>
-      <p class="benefit-desc">Atur ukuran, jumlah rak, drawer, hingga pilihan finishing PVC atau HPL Premium — semua sesuai ruangan dan selera kamu.</p>
+    <div class="bg-white p-8 hover:bg-cream transition-colors">
+      <span class="font-display text-3xl font-bold text-warm block mb-4">02</span>
+      <div class="text-[0.95rem] font-semibold text-ink mb-2.5">Kustomisasi Penuh</div>
+      <p class="text-[0.82rem] text-ink/60 leading-[1.65]">Atur ukuran, jumlah rak, drawer, hingga pilihan finishing PVC atau HPL Premium — semua sesuai ruangan dan selera kamu.</p>
     </div>
-    <div class="benefit">
-      <span class="benefit-num">03</span>
-      <div class="benefit-title">Gratis Ongkir Garut Kota</div>
-      <p class="benefit-desc">Tidak ada biaya pengiriman tambahan. Produk diantar langsung ke alamatmu di seluruh wilayah Garut Kota.</p>
+    <div class="bg-white p-8 hover:bg-cream transition-colors">
+      <span class="font-display text-3xl font-bold text-warm block mb-4">03</span>
+      <div class="text-[0.95rem] font-semibold text-ink mb-2.5">Gratis Ongkir Garut Kota</div>
+      <p class="text-[0.82rem] text-ink/60 leading-[1.65]">Tidak ada biaya pengiriman tambahan. Produk diantar langsung ke alamatmu di seluruh wilayah Garut Kota.</p>
     </div>
-    <div class="benefit">
-      <span class="benefit-num">04</span>
-      <div class="benefit-title">Sudah Jadi & Siap Pakai</div>
-      <p class="benefit-desc">Produk tiba dalam kondisi selesai dan siap digunakan. Tidak perlu repot merakit dari awal.</p>
+    <div class="bg-white p-8 hover:bg-cream transition-colors">
+      <span class="font-display text-3xl font-bold text-warm block mb-4">04</span>
+      <div class="text-[0.95rem] font-semibold text-ink mb-2.5">Sudah Jadi & Siap Pakai</div>
+      <p class="text-[0.82rem] text-ink/60 leading-[1.65]">Produk tiba dalam kondisi selesai dan siap digunakan. Tidak perlu repot merakit dari awal.</p>
     </div>
-    <div class="benefit">
-      <span class="benefit-num">05</span>
-      <div class="benefit-title">Estimasi Harga Transparan</div>
-      <p class="benefit-desc">Harga berubah otomatis sesuai konfigurasi yang kamu pilih — tidak ada biaya tersembunyi.</p>
+    <div class="bg-white p-8 hover:bg-cream transition-colors">
+      <span class="font-display text-3xl font-bold text-warm block mb-4">05</span>
+      <div class="text-[0.95rem] font-semibold text-ink mb-2.5">Estimasi Harga Transparan</div>
+      <p class="text-[0.82rem] text-ink/60 leading-[1.65]">Harga berubah otomatis sesuai konfigurasi yang kamu pilih — tidak ada biaya tersembunyi.</p>
     </div>
-    <div class="benefit">
-      <span class="benefit-num">06</span>
-      <div class="benefit-title">Konsultasi via WhatsApp</div>
-      <p class="benefit-desc">Tim Debbi Meubel siap membantu memilih model dan finishing terbaik langsung melalui WhatsApp.</p>
+    <div class="bg-white p-8 hover:bg-cream transition-colors">
+      <span class="font-display text-3xl font-bold text-warm block mb-4">06</span>
+      <div class="text-[0.95rem] font-semibold text-ink mb-2.5">Konsultasi via WhatsApp</div>
+      <p class="text-[0.82rem] text-ink/60 leading-[1.65]">Tim Debbi Meubel siap membantu memilih model dan finishing terbaik langsung melalui WhatsApp.</p>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════ HOW IT WORKS ════════════════ -->
-<div class="how-bg" id="cara-pesan">
-  <div class="section">
-    <div class="section-eyebrow reveal">Cara Pesan</div>
-    <h2 class="section-title reveal" style="transition-delay:.1s">
-      4 langkah mudah<br>dapatkan furnitur <em>impianmu</em>
+<div class="bg-warm" id="cara-pesan">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 py-16 md:py-20">
+    <div class="reveal flex items-center gap-2 text-[0.68rem] font-semibold tracking-[0.14em] uppercase text-ink/60 mb-3 before:content-[''] before:block before:w-5 before:h-px before:bg-ink/30">Cara Pesan</div>
+    <h2 class="reveal font-display text-3xl md:text-[clamp(1.8rem,3.5vw,2.4rem)] font-bold leading-[1.2] text-ink mb-12" style="transition-delay:.1s">
+      4 langkah mudah<br>dapatkan furnitur <em class="text-rust italic">impianmu</em>
     </h2>
-    <div class="steps reveal" style="transition-delay:.2s">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-title">Pilih Model</div>
-        <p class="step-desc">Jelajahi katalog dan pilih model furnitur yang sesuai dengan kebutuhanmu.</p>
+    
+    <div class="reveal grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-0 relative" style="transition-delay:.2s">
+      <!-- Garis penghubung desktop -->
+      <div class="hidden md:block absolute top-[28px] left-[12.5%] right-[12.5%] h-px bg-border z-0"></div>
+      
+      <div class="px-0 md:px-5 text-center relative z-10">
+        <div class="w-14 h-14 bg-ink text-white font-display text-[1.2rem] font-bold flex items-center justify-center mx-auto mb-5 rounded-full">1</div>
+        <div class="text-[0.88rem] font-semibold text-ink mb-2">Pilih Model</div>
+        <p class="text-[0.76rem] text-ink/60 leading-[1.55]">Jelajahi katalog dan pilih model furnitur yang sesuai dengan kebutuhanmu.</p>
       </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-title">Kustomisasi 3D</div>
-        <p class="step-desc">Sesuaikan ukuran, finishing, rak, dan drawer lewat simulator 3D interaktif.</p>
+      <div class="px-0 md:px-5 text-center relative z-10">
+        <div class="w-14 h-14 bg-ink text-white font-display text-[1.2rem] font-bold flex items-center justify-center mx-auto mb-5 rounded-full">2</div>
+        <div class="text-[0.88rem] font-semibold text-ink mb-2">Kustomisasi 3D</div>
+        <p class="text-[0.76rem] text-ink/60 leading-[1.55]">Sesuaikan ukuran, finishing, rak, dan drawer lewat simulator 3D interaktif.</p>
       </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-title">Pesan & Bayar</div>
-        <p class="step-desc">Isi data diri dan lakukan pembayaran. Tim kami konfirmasi dalam 1×24 jam.</p>
+      <div class="px-0 md:px-5 text-center relative z-10">
+        <div class="w-14 h-14 bg-ink text-white font-display text-[1.2rem] font-bold flex items-center justify-center mx-auto mb-5 rounded-full">3</div>
+        <div class="text-[0.88rem] font-semibold text-ink mb-2">Pesan & Bayar</div>
+        <p class="text-[0.76rem] text-ink/60 leading-[1.55]">Isi data diri dan lakukan pembayaran. Tim kami konfirmasi dalam 1×24 jam.</p>
       </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-title">Terima di Rumah</div>
-        <p class="step-desc">Furnitur dikirim sudah jadi dan siap pakai. Gratis ongkir untuk Garut Kota.</p>
+      <div class="px-0 md:px-5 text-center relative z-10">
+        <div class="w-14 h-14 bg-ink text-white font-display text-[1.2rem] font-bold flex items-center justify-center mx-auto mb-5 rounded-full">4</div>
+        <div class="text-[0.88rem] font-semibold text-ink mb-2">Terima di Rumah</div>
+        <p class="text-[0.76rem] text-ink/60 leading-[1.55]">Furnitur dikirim sudah jadi dan siap pakai. Gratis ongkir untuk Garut Kota.</p>
       </div>
     </div>
   </div>
 </div>
 
 <!-- ═══════════════════════ CTA BAND ════════════════════ -->
-<div class="cta-band">
-  <div class="cta-band-inner reveal">
+<div class="bg-gradient-to-br from-rust to-[#8B3A14] text-white">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 py-16 md:py-20 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 items-center reveal">
     <div>
-      <h2 class="cta-band-title">Siap desain furniturmu sekarang?</h2>
-      <p class="cta-band-desc">Mulai dari katalog, kustomisasi lewat simulator 3D, dan dapatkan furnitur impianmu — gratis ongkir ke Garut Kota.</p>
+      <h2 class="font-display text-[clamp(1.6rem,3vw,2.2rem)] font-bold leading-[1.2] mb-2.5">Siap desain furniturmu sekarang?</h2>
+      <p class="text-[0.88rem] text-white/70 leading-[1.6] max-w-xl">Mulai dari katalog, kustomisasi lewat simulator 3D, dan dapatkan furnitur impianmu — gratis ongkir ke Garut Kota.</p>
     </div>
-    <div class="cta-buttons">
-      <a href="catalog.html" class="btn-white">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    <div class="flex flex-col gap-2.5">
+      <a href="catalog.html" class="bg-white text-rust py-4 px-8 whitespace-nowrap text-[0.78rem] font-semibold tracking-[0.08em] uppercase inline-flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         Lihat Katalog
       </a>
-      <a href="https://wa.me/6281234567890?text=Halo%20Debbi%20Meubel%2C%20saya%20ingin%20konsultasi%20produk." target="_blank" class="btn-wa">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <a href="https://wa.me/6281234567890?text=Halo%20Debbi%20Meubel%2C%20saya%20ingin%20konsultasi%20produk." target="_blank" class="bg-[#25D366] text-white py-4 px-8 whitespace-nowrap text-[0.78rem] font-semibold tracking-[0.08em] uppercase inline-flex items-center justify-center gap-2 hover:bg-[#1ebe5c] transition-colors mt-0 md:mt-2.5">
+        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Chat WhatsApp
       </a>
     </div>
@@ -834,53 +303,48 @@ footer {
 </div>
 
 <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
-<footer>
-  <div class="footer-inner">
+<footer class="bg-ink text-white/50">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 pt-12 pb-8 grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-8 md:gap-12">
     <div>
-      <div class="footer-brand-name">Debbi <span>Meubel</span></div>
-      <p class="footer-brand-desc">Furnitur custom berkualitas asal Garut. Desain sendiri lewat simulator 3D, kami wujudkan dan antarkan gratis ke rumahmu.</p>
+      <div class="font-display text-[1.3rem] font-bold text-white mb-2.5">Debbi <span class="text-gold">Meubel</span></div>
+      <p class="text-[0.78rem] leading-[1.65] max-w-[280px]">Furnitur custom berkualitas asal Garut. Desain sendiri lewat simulator 3D, kami wujudkan dan antarkan gratis ke rumahmu.</p>
     </div>
     <div>
-      <div class="footer-col-title">Navigasi</div>
-      <ul class="footer-links">
-        <li><a href="catalog.html">Katalog Produk</a></li>
-        <li><a href="#cara-pesan">Cara Pesan</a></li>
-        <li><a href="#testimoni">Testimoni</a></li>
-        <li><a href="#benefits">Keunggulan</a></li>
+      <div class="text-[0.65rem] font-bold tracking-[0.12em] uppercase text-white mb-3.5">Navigasi</div>
+      <ul class="flex flex-col gap-2">
+        <li><a href="catalog.html" class="text-[0.78rem] text-white/45 hover:text-white transition-colors">Katalog Produk</a></li>
+        <li><a href="#cara-pesan" class="text-[0.78rem] text-white/45 hover:text-white transition-colors">Cara Pesan</a></li>
+        <li><a href="#benefits" class="text-[0.78rem] text-white/45 hover:text-white transition-colors">Keunggulan</a></li>
       </ul>
     </div>
     <div>
-      <div class="footer-col-title">Kontak</div>
-      <ul class="footer-links">
-        <li><a href="https://wa.me/6281234567890" target="_blank">WhatsApp Admin</a></li>
-        <li><a href="#">Garut, Jawa Barat</a></li>
+      <div class="text-[0.65rem] font-bold tracking-[0.12em] uppercase text-white mb-3.5">Kontak</div>
+      <ul class="flex flex-col gap-2">
+        <li><a href="https://wa.me/6281234567890" target="_blank" class="text-[0.78rem] text-white/45 hover:text-white transition-colors">WhatsApp Admin</a></li>
+        <li><span class="text-[0.78rem] text-white/45">Garut, Jawa Barat</span></li>
       </ul>
     </div>
   </div>
-  <div class="footer-bottom">
-    <span>© 2025 Debbi Meubel Garut. Semua hak dilindungi.</span>
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 py-5 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-2 text-[0.72rem] text-center md:text-left">
+    <span>© 2026 Debbi Meubel Garut. Semua hak dilindungi.</span>
     <span>Furnitur Custom · Gratis Ongkir Garut Kota</span>
   </div>
 </footer>
+
+<!-- Panggil file navbar global lu -->
+<script src="navbar-auth.js"></script>
 
 <script>
 // ── POPUP ──────────────────────────────────────────
 function closePopup() {
   const overlay = document.getElementById('popup-overlay');
-  overlay.style.opacity = '0';
-  overlay.style.transition = 'opacity .3s ease';
+  overlay.classList.add('opacity-0');
   setTimeout(() => { overlay.style.display = 'none'; }, 300);
 }
 
-// Close on backdrop click
-document.getElementById('popup-overlay').addEventListener('click', function(e) {
-  if (e.target === this) closePopup();
-});
-
-// Close on Escape
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closePopup();
-});
+// Close on backdrop click atau tombol escape
+document.getElementById('popup-overlay').addEventListener('click', (e) => { if (e.target === document.getElementById('popup-overlay')) closePopup(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closePopup(); });
 
 // Auto-close after 12s
 setTimeout(closePopup, 12000);
