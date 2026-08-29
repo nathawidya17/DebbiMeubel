@@ -1,155 +1,993 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Debbi Meubel — Katalog</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,300;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,300;1,300&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
                         serif: ['"Noto Serif Display"', 'Georgia', 'serif'],
-                        sans:  ['"DM Sans"', 'sans-serif'],
+                        sans: ['"DM Sans"', 'sans-serif'],
                     },
                     colors: {
-                        stone: { 50:'#f8f7f5',100:'#efefed',200:'#e5e3df',300:'#d0ceca',400:'#b0ada6',500:'#8a8a84',600:'#555550',900:'#1a1a18' },
+                        stone: {
+                            50: '#f8f7f5',
+                            100: '#efefed',
+                            200: '#e5e3df',
+                            300: '#d0ceca',
+                            400: '#b0ada6',
+                            500: '#8a8a84',
+                            600: '#555550',
+                            900: '#1a1a18'
+                        },
                         rust: '#c8602a',
                     },
                     keyframes: {
-                        fadeUp:  { '0%':{ opacity:'0', transform:'translateY(12px)' }, '100%':{ opacity:'1', transform:'translateY(0)' } },
-                        shimmer: { '0%':{ backgroundPosition:'-600px 0' }, '100%':{ backgroundPosition:'600px 0' } },
+                        fadeUp: {
+                            '0%': {
+                                opacity: '0',
+                                transform: 'translateY(15px)'
+                            },
+                            '100%': {
+                                opacity: '1',
+                                transform: 'translateY(0)'
+                            }
+                        }
                     },
                     animation: {
-                        fadeUp:  'fadeUp 0.45s ease both',
-                        shimmer: 'shimmer 1.4s linear infinite',
-                    },
+                        fadeUp: 'fadeUp .5s ease both'
+                    }
                 }
             }
         }
     </script>
+
     <style>
-        body { -webkit-font-smoothing: antialiased; }
-        .skeleton { background: linear-gradient(90deg,#70706e 25%,#4c4b4a 50%,#efefed 75%); background-size:600px 100%; animation:shimmer 1.4s linear infinite; }
-        @keyframes shimmer { 0%{background-position:-600px 0} 100%{background-position:600px 0} }
-        .catalog-card { animation: fadeUp 0.45s ease both; }
-        @keyframes fadeUp { 0%{opacity:0;transform:translateY(12px)} 100%{opacity:1;transform:translateY(0)} }
+        body {
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .catalog-card {
+            animation: fadeUp .5s ease both;
+        }
+
+        .product-image {
+            transition: transform .6s ease;
+        }
+
+        .catalog-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .modal-backdrop {
+            backdrop-filter: blur(5px);
+        }
     </style>
+
     <script src="navbar-auth.js"></script>
 </head>
+
+
 <body class="bg-stone-200 font-sans text-stone-900">
-    <div class="max-w-[1400px] mx-auto px-8 md:px-12 pt-12 pb-8">
-        <p class="text-xs tracking-[0.14em] uppercase text-stone-400 mb-3">Koleksi Produk</p>
-        <h1 class="font-serif font-light text-4xl md:text-5xl text-stone-900">
-            Pilih model, <em class="italic text-rust">sesuaikan</em> sesukamu.
-        </h1>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <section class="max-w-[1400px] mx-auto px-8 md:px-12 pt-14 pb-8">
+
+        <p class="text-xs tracking-[0.16em] uppercase text-stone-400 mb-3">
+            Koleksi Debbi Meubel
+        </p>
+
+        <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+
+            <div>
+
+                <h1 class="font-serif font-light text-4xl md:text-5xl lg:text-6xl leading-tight">
+
+                    Pilih model,
+                    <em class="italic text-rust">sesuaikan</em>
+                    sesuai kebutuhanmu.
+
+                </h1>
+
+                <p class="mt-5 text-sm text-stone-500 max-w-2xl leading-relaxed">
+
+                    Jelajahi pilihan furnitur yang dapat disesuaikan.
+                    Lihat berbagai pilihan kustomisasi sebelum menentukan
+                    produk yang sesuai dengan kebutuhan Anda.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= PROMO ================= -->
+
+    <section class="max-w-[1400px] mx-auto px-8 md:px-12">
+
+        <div class="border-y border-stone-300 py-4 flex flex-col md:flex-row
+                    md:items-center md:justify-between gap-3">
+
+            <div class="flex items-center gap-3">
+
+                <div class="w-8 h-8 bg-stone-900 text-white
+                            flex items-center justify-center text-sm">
+                    🚚
+                </div>
+
+                <div>
+
+                    <p class="text-xs font-medium tracking-wide uppercase">
+                        Gratis Ongkir Se-Garut
+                    </p>
+
+                    <p class="text-xs text-stone-500 mt-0.5">
+                        Nikmati pengiriman tanpa biaya untuk wilayah Garut.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <span class="text-xs text-rust">
+                Promo berlaku sesuai ketentuan
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FILTER ================= -->
+
+    <section class="max-w-[1400px] mx-auto px-8 md:px-12 pt-8">
+
+        <div class="flex flex-wrap gap-2">
+
+            <button
+                onclick="filterProducts('all')"
+                data-filter="all"
+                class="filter-btn px-4 py-2 text-xs border border-stone-900 bg-stone-900 text-white">
+                Semua Produk
+            </button>
+
+            <button
+                onclick="filterProducts('ukuran')"
+                data-filter="ukuran"
+                class="filter-btn px-4 py-2 text-xs border border-stone-300 bg-transparent text-stone-600 hover:border-stone-900 transition">
+                Bisa Ubah Ukuran
+            </button>
+
+            <button
+                onclick="filterProducts('interior')"
+                data-filter="interior"
+                class="filter-btn px-4 py-2 text-xs border border-stone-300 bg-transparent text-stone-600 hover:border-stone-900 transition">
+                Interior & Rak
+            </button>
+
+            <button
+                onclick="filterProducts('drawer')"
+                data-filter="drawer"
+                class="filter-btn px-4 py-2 text-xs border border-stone-300 bg-transparent text-stone-600 hover:border-stone-900 transition">
+                Drawer/Laci
+            </button>
+
+          
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= PRODUCT GRID ================= -->
+
+    <section class="max-w-[1400px] mx-auto px-8 md:px-12 py-10 pb-24">
+
+        <div id="catalogList"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= MODAL ================= -->
+
+    <div id="customModal"
+        class="fixed inset-0 z-50 hidden items-center justify-center
+               bg-black/40 modal-backdrop px-5">
+
+        <div class="bg-white max-w-xl w-full max-h-[90vh] overflow-y-auto">
+
+            <div class="p-7 md:p-9">
+
+                <div class="flex items-start justify-between gap-5">
+
+                    <div>
+
+                        <p class="text-[10px] tracking-[0.18em] uppercase text-stone-400 mb-2">
+                            Pilihan Kustomisasi
+                        </p>
+
+                        <h2 id="modalTitle"
+                            class="font-serif text-3xl font-light">
+                        </h2>
+
+                    </div>
+
+                    <button
+                        onclick="closeModal()"
+                        class="w-8 h-8 border border-stone-300
+                               flex items-center justify-center
+                               text-stone-500 hover:text-stone-900">
+                        ×
+                    </button>
+
+                </div>
+
+
+                <p id="modalDescription"
+                    class="text-sm text-stone-500 leading-relaxed mt-5">
+                </p>
+
+
+                <div class="mt-7">
+
+                    <p class="text-xs uppercase tracking-wider text-stone-400 mb-3">
+                        Yang dapat disesuaikan
+                    </p>
+
+                    <div id="modalOptions"
+                        class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    </div>
+
+                </div>
+
+
+                <!-- FINISHING -->
+
+                <div class="mt-7 pt-6 border-t border-stone-200">
+
+                    <p class="text-xs uppercase tracking-wider text-stone-400 mb-3">
+                        Pilihan finishing
+                    </p>
+
+                    <div class="flex gap-2">
+
+                        <span class="px-4 py-2 border border-stone-300 text-xs">
+                            HPL
+                        </span>
+
+                        <span class="px-4 py-2 border border-stone-300 text-xs">
+                            PVC
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="mt-8">
+
+                    <button
+                        id="modalButton"
+                        class="w-full bg-stone-900 text-white py-3.5
+                               text-xs tracking-wide uppercase
+                               hover:bg-rust transition">
+
+                        Kustomisasi Produk →
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="max-w-[1400px] mx-auto px-8 md:px-12"><hr class="border-stone-200"></div>
 
-    <div class="max-w-[1400px] mx-auto px-8 md:px-12 py-10 pb-24">
-        <div id="catalogList" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 bg-stone-200"></div>
+    <!-- ================= FOOTER ================= -->
+
+    <div class="max-w-[1400px] mx-auto px-8 md:px-12">
+
+        <hr class="border-stone-300">
+
     </div>
 
-    <div class="max-w-[1400px] mx-auto px-8 md:px-12 pb-16 flex items-center justify-center gap-1">
-        <button class="w-9 h-9 flex items-center justify-center border border-stone-200 text-stone-400 hover:border-stone-900 hover:text-stone-900 transition-colors">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-        <button class="w-9 h-9 flex items-center justify-center border border-stone-900 bg-stone-900 text-white text-xs">1</button>
-        <button class="w-9 h-9 flex items-center justify-center border border-stone-200 text-stone-500 hover:border-stone-900 hover:text-stone-900 transition-colors text-xs">2</button>
-        <span class="px-1 text-stone-300 text-sm">···</span>
-        <button class="w-9 h-9 flex items-center justify-center border border-stone-200 text-stone-400 hover:border-stone-900 hover:text-stone-900 transition-colors">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
-    </div>
+    <footer
+        class="max-w-[1400px] mx-auto px-8 md:px-12 py-7
+               flex flex-col md:flex-row items-center
+               justify-between gap-2">
 
-    <div class="max-w-[1400px] mx-auto px-8 md:px-12"><hr class="border-stone-200"></div>
-    <footer class="max-w-[1400px] mx-auto px-8 md:px-12 py-6 flex flex-col md:flex-row items-center justify-between gap-2">
-        <span class="text-xs text-stone-400">© 2026 Debbi Meubel</span>
-        <span class="text-xs text-stone-400">Garut, Jawa Barat</span>
+        <span class="text-xs text-stone-400">
+            © 2026 Debbi Meubel
+        </span>
+
+        <span class="text-xs text-stone-400">
+            Garut, Jawa Barat
+        </span>
+
     </footer>
 
-    <script>
-        // Konfigurasi URL Base API Backend mu
-        const API_BASE_URL = 'https://debbimeubel.up.railway.app/api';
 
-        const BADGE_CYCLE  = [null, null, 'new', 'premium', null];
-        const BADGE_LABELS = { new: 'Baru', premium: 'Premium' };
+<script>
 
-        function formatIDR(n) {
-            return new Intl.NumberFormat('id-ID', { style:'currency', currency:'IDR', minimumFractionDigits:0 }).format(n);
-        }
 
-        // Tampilan loading ambalan skeleton
-        function skeletonCard() {
-            return `<div class="bg-white border border-stone-200">
-                <div class="aspect-square w-full skeleton"></div>
-                <div class="p-4 space-y-2">
-                    <div class="skeleton h-3 w-4/5"></div>
-                    <div class="skeleton h-3 w-2/5 mt-1"></div>
+/* =========================================================
+   API
+========================================================= */
+
+const API_BASE_URL =
+    'https://debbimeubel.up.railway.app/api';
+
+
+
+/* =========================================================
+   DATA KUSTOMISASI PRODUK
+========================================================= */
+
+const CUSTOMIZATION = {
+
+    "Hiro Drawer": {
+
+        categories: ["drawer"],
+
+        description:
+            "Hiro Drawer dapat disesuaikan untuk mengatur jumlah drawer dan ruang kosong sesuai kebutuhan penyimpanan.",
+
+        options: [
+            "Menambah drawer",
+            "Menambah rak kosong",
+            "Mengurangi drawer",
+            "Mengurangi rak kosong",
+        ]
+
+    },
+
+
+    "Hiro Rak 2 Drawer": {
+
+        categories: ["drawer"],
+
+        description:
+            "Hiro Rak 2 Drawer dapat disesuaikan dengan mengatur jumlah drawer dan ruang kosong pada bagian penyimpanan.",
+
+        options: [
+            "Menambah drawer",
+            "menambah rak kosong",
+            "Mengurangi drawer",
+            "Mengurangi rak kosong",
+        ]
+
+    },
+
+
+    "Rak Serbaguna": {
+
+        categories: ["ukuran"],
+
+        description:
+            "Rak Serbaguna dapat disesuaikan berdasarkan ukuran dan jumlah rak sesuai dengan kebutuhan ruang.",
+
+        options: [
+            "Mengubah lebar",
+            "Mengubah tinggi",
+            "Mengubah kedalaman",
+            "Menambah rak",
+            "Mengurangi rak",
+        ]
+
+    },
+
+
+    "Lemari 2 pintu": {
+
+        categories: ["interior", "finishing"],
+
+        description:
+            "Lemari 2 pintu memberikan pilihan konfigurasi bagian dalam agar dapat disesuaikan dengan kebutuhan penyimpanan.",
+
+        options: [
+            "Gantungan baju",
+            "Rak bagian kiri",
+            "Maksimal 3 rak",
+            "Drawer bagian kanan",
+            "Laci dorong",
+            "Rak bagian kanan",
+        ]
+
+    },
+
+
+    "Lemari 2 Pintu Kaca Masuk": {
+
+        categories: ["interior", "finishing"],
+
+        description:
+            "Lemari 2 Pintu Kaca Masuk memiliki beberapa pilihan konfigurasi rak dan posisi gantungan pada bagian dalam lemari.",
+
+        options: [
+            "Posisi gantungan atas",
+            "Posisi gantungan tengah",
+            "Posisi gantungan antara tengah dan atas",
+            "Maksimal 3 rak dengan gantungan",
+            "Maksimal 4 rak tanpa gantungan",
+            "Rak bagian kanan atas",
+            "Rak bagian kanan bawah",
+        ]
+
+    },
+
+
+    "Lemari Kabinet": {
+
+        categories: ["interior", "finishing"],
+
+        description:
+            "Lemari Kabinet dapat dikembangkan dengan menambahkan komponen serta menentukan konfigurasi rak dan jenis bukaan pintu.",
+
+        options: [
+            "Menambah rak ke samping",
+            "Menambah rak ke atas",
+            "Pintu buka kiri",
+            "Pintu tarik",
+            "Pintu buka kanan",
+        ]
+
+    }
+
+};
+
+
+
+/* =========================================================
+   FORMAT HARGA
+========================================================= */
+
+function formatIDR(n) {
+
+    return new Intl.NumberFormat('id-ID', {
+
+        style: 'currency',
+
+        currency: 'IDR',
+
+        minimumFractionDigits: 0
+
+    }).format(n);
+
+}
+
+
+
+/* =========================================================
+   MENCARI DATA KUSTOMISASI
+========================================================= */
+
+function getCustomization(productName) {
+
+    if (CUSTOMIZATION[productName]) {
+
+        return CUSTOMIZATION[productName];
+
+    }
+
+    // fallback apabila penamaan di database sedikit berbeda
+
+    const key = Object.keys(CUSTOMIZATION)
+        .find(key =>
+            productName.toLowerCase()
+                .includes(key.toLowerCase())
+        );
+
+    return key ? CUSTOMIZATION[key] : {
+
+        categories: ["finishing"],
+
+        description:
+            "Produk ini tersedia dengan pilihan finishing HPL dan PVC.",
+
+        options: [
+            "Finishing HPL",
+            "Finishing PVC"
+        ]
+
+    };
+
+}
+
+
+
+/* =========================================================
+   CARD PRODUK
+========================================================= */
+
+function createCard(item, index) {
+
+    const custom =
+        getCustomization(item.name);
+
+    const imageURL = item.thumbnail
+
+        ? `${API_BASE_URL.split('/api')[0]}/uploads/${item.thumbnail}`
+
+        : '';
+
+
+
+    const chips =
+        custom.options.slice(0, 3)
+            .map(option => `
+                <span class="text-[10px] px-2.5 py-1
+                             bg-stone-100 text-stone-500">
+                    ${option}
+                </span>
+            `)
+            .join('');
+
+
+
+    return `
+
+    <article
+
+        class="catalog-card bg-white border border-stone-200
+               group hover:border-stone-400 transition-all duration-300"
+
+        data-categories="${custom.categories.join(' ')}"
+
+        style="animation-delay:${(index % 8) * 50}ms">
+
+
+        <!-- IMAGE -->
+
+        <div class="relative aspect-square bg-stone-50
+                    overflow-hidden flex items-center justify-center">
+
+            ${
+                imageURL
+
+                ? `
+
+                <img
+                    src="${imageURL}"
+                    alt="${item.name}"
+                    class="product-image w-full h-full object-cover">
+
+                `
+
+                : `
+
+                <div class="text-stone-300 text-5xl">
+                    ◇
                 </div>
-            </div>`;
-        }
 
-        // Generate Card HTML Berdasarkan Data Murni dari Database
-        function createCard(item, index) {
-            const badgeKey = BADGE_CYCLE[index % BADGE_CYCLE.length];
-            const delay = (index % 10) * 40;
-
-            const badgeHTML = badgeKey
-                ? `<div class="absolute top-2.5 left-2.5 text-[0.6rem] tracking-widest uppercase px-2 py-0.5 text-white font-medium"
-                        style="background:${badgeKey === 'new' ? '#c8602a' : '#1a1a18'}">${BADGE_LABELS[badgeKey]}</div>`
-                : '';
-
-            // MODIFIKASI DISINI: Jika field thumbnail ada isinya di DB, panggil URL backend port 3001
-            const imgHTML = item.thumbnail
-                ? `<img src="${API_BASE_URL.split('/api')[0]}/uploads/${item.thumbnail}" alt="${item.name}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">`
-                : `<svg class="w-14 h-14 text-stone-300 transition-transform duration-500 group-hover:scale-105" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 64 64">
-                       <path d="M32 8L8 20v24l24 12 24-12V20L32 8z"/><path d="M32 8v36M8 20l24 12 24-12"/>
-                   </svg>`;
-
-            return `
-            <div class="catalog-card bg-white group cursor-pointer hover:bg-stone-50 transition-colors border border-stone-200"
-                 style="animation-delay:${delay}ms"
-                 onclick="window.location.href='detail.html?slug=${item.slug}'">
-                <div class="relative aspect-square bg-white overflow-hidden flex items-center justify-center">
-                    ${badgeHTML}
-                    ${imgHTML}
-                </div>
-                <div class="p-4 border-t border-stone-200">
-                    <p class="text-sm text-stone-800 leading-snug mb-1.5 line-clamp-2">${item.name}</p>
-                    <p class="font-serif font-light text-lg text-stone-900">${formatIDR(item.basePrice)}</p>
-                </div>
-            </div>`;
-        }
-
-        // Fungsi Ambil Data dari Route Backend GET /api/products
-        async function loadCatalog() {
-            const grid = document.getElementById('catalogList');
-            
-            // Pasang loading skeleton dulu biar rapi pas nunggu response API
-            grid.innerHTML = Array(10).fill(0).map(skeletonCard).join('');
-
-            try {
-                const res = await fetch(`${API_BASE_URL}/products`);
-                if (!res.ok) throw new Error('Gagal fetch data dari server API');
-                
-                const products = await res.json();
-
-                if (products && products.length > 0) {
-                    grid.innerHTML = products.map((item, i) => createCard(item, i)).join('');
-                } else {
-                    grid.innerHTML = `<div class="col-span-full py-20 text-center text-sm text-stone-400">Tidak ada produk aktif di database.</div>`;
-                }
-            } catch (error) {
-                console.error(error);
-                grid.innerHTML = `<div class="col-span-full py-20 text-center text-sm text-red-500 font-medium">Gagal memuat katalog dari database. Pastikan server backend Anda menyala.</div>`;
+                `
             }
+
+
+            <!-- BADGE -->
+
+            <div class="absolute top-3 left-3">
+
+                <span class="bg-rust text-white
+                             text-[9px] uppercase
+                             tracking-widest px-3 py-1.5">
+
+                    Bisa Dikustom
+
+                </span>
+
+            </div>
+
+
+            <!-- HOVER -->
+
+            <div
+                class="absolute inset-0 bg-stone-900/10
+                       opacity-0 group-hover:opacity-100
+                       transition-opacity duration-300
+                       flex items-end justify-center pb-4">
+
+                <button
+
+                    onclick='openCustomization(${JSON.stringify(item).replace(/'/g, "&#39;")})'
+
+                    class="bg-white px-5 py-3 text-xs
+                           shadow-lg hover:bg-stone-900
+                           hover:text-white transition">
+
+                    Lihat Opsi Kustom →
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- INFO -->
+
+        <div class="p-5 border-t border-stone-200">
+
+            <div class="flex justify-between gap-3">
+
+                <div>
+
+                    <h3 class="text-sm font-medium text-stone-900">
+
+                        ${item.name}
+
+                    </h3>
+
+                    <p class="font-serif text-xl font-light mt-1">
+
+                        ${formatIDR(item.basePrice)}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- CUSTOMIZATION INFO -->
+
+            <div class="mt-4">
+
+                <p class="text-[10px] uppercase
+                          tracking-wider text-stone-400 mb-2">
+
+                    Dapat disesuaikan
+
+                </p>
+
+
+                <div class="flex flex-wrap gap-1.5">
+
+                    ${chips}
+
+                </div>
+
+            </div>
+
+
+            <!-- BUTTON -->
+
+            <button
+
+                onclick='openCustomization(${JSON.stringify(item).replace(/'/g, "&#39;")})'
+
+                class="w-full mt-5 border border-stone-300
+                       py-2.5 text-xs text-stone-600
+                       hover:border-stone-900
+                       hover:text-stone-900 transition">
+
+                Lihat semua pilihan kustomisasi
+
+            </button>
+
+        </div>
+
+    </article>
+
+    `;
+
+}
+
+
+
+/* =========================================================
+   LOAD PRODUCT
+========================================================= */
+
+let allProducts = [];
+
+async function loadCatalog() {
+
+    const grid =
+        document.getElementById('catalogList');
+
+    grid.innerHTML = `
+
+        ${Array(6).fill(0).map(() => `
+
+            <div class="bg-white border border-stone-200">
+
+                <div class="aspect-square bg-stone-100"></div>
+
+                <div class="p-5 space-y-3">
+
+                    <div class="h-3 w-2/3 bg-stone-100"></div>
+
+                    <div class="h-3 w-1/3 bg-stone-100"></div>
+
+                </div>
+
+            </div>
+
+        `).join('')}
+
+    `;
+
+
+    try {
+
+        const res =
+            await fetch(`${API_BASE_URL}/products`);
+
+        if (!res.ok)
+            throw new Error('Gagal mengambil data produk');
+
+
+        allProducts =
+            await res.json();
+
+
+        renderProducts(allProducts);
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        grid.innerHTML = `
+
+            <div class="col-span-full text-center py-20">
+
+                <p class="text-sm text-red-500">
+                    Gagal memuat katalog produk.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function renderProducts(products) {
+
+    const grid =
+        document.getElementById('catalogList');
+
+
+    if (!products.length) {
+
+        grid.innerHTML = `
+
+            <div class="col-span-full text-center py-20">
+
+                <p class="text-sm text-stone-400">
+                    Produk tidak tersedia.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    grid.innerHTML =
+        products
+            .map((item, index) =>
+                createCard(item, index))
+            .join('');
+
+}
+
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+function filterProducts(category) {
+
+    document
+        .querySelectorAll('.filter-btn')
+        .forEach(btn => {
+
+            btn.classList.remove(
+                'bg-stone-900',
+                'text-white',
+                'border-stone-900'
+            );
+
+            btn.classList.add(
+                'bg-transparent',
+                'text-stone-600',
+                'border-stone-300'
+            );
+
+        });
+
+
+    const active =
+        document.querySelector(
+            `[data-filter="${category}"]`
+        );
+
+
+    if (active) {
+
+        active.classList.remove(
+            'bg-transparent',
+            'text-stone-600',
+            'border-stone-300'
+        );
+
+        active.classList.add(
+            'bg-stone-900',
+            'text-white',
+            'border-stone-900'
+        );
+
+    }
+
+
+    if (category === 'all') {
+
+        renderProducts(allProducts);
+
+        return;
+
+    }
+
+
+    const filtered =
+        allProducts.filter(item => {
+
+            const custom =
+                getCustomization(item.name);
+
+            return custom.categories
+                .includes(category);
+
+        });
+
+
+    renderProducts(filtered);
+
+}
+
+
+
+/* =========================================================
+   MODAL KUSTOMISASI
+========================================================= */
+
+function openCustomization(item) {
+
+    const custom =
+        getCustomization(item.name);
+
+
+    document.getElementById('modalTitle')
+        .textContent = item.name;
+
+
+    document.getElementById('modalDescription')
+        .textContent = custom.description;
+
+
+    document.getElementById('modalOptions')
+        .innerHTML = custom.options
+            .map(option => `
+
+                <div class="flex items-center gap-3
+                            border border-stone-200
+                            px-4 py-3">
+
+                    <span class="text-rust">✓</span>
+
+                    <span class="text-xs text-stone-600">
+
+                        ${option}
+
+                    </span>
+
+                </div>
+
+            `)
+            .join('');
+
+
+    document.getElementById('modalButton')
+        .onclick = function () {
+
+            window.location.href =
+                `detail.html?slug=${item.slug}`;
+
+        };
+
+
+    const modal =
+        document.getElementById('customModal');
+
+
+    modal.classList.remove('hidden');
+
+    modal.classList.add('flex');
+
+}
+
+
+
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
+
+function closeModal() {
+
+    const modal =
+        document.getElementById('customModal');
+
+    modal.classList.add('hidden');
+
+    modal.classList.remove('flex');
+
+}
+
+
+
+/* =========================================================
+   CLOSE MODAL KETIKA KLIK LUAR
+========================================================= */
+
+document
+    .getElementById('customModal')
+    .addEventListener('click', function(e) {
+
+        if (e.target === this) {
+
+            closeModal();
+
         }
 
-        document.addEventListener('DOMContentLoaded', loadCatalog);
-    </script>
+    });
+
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+document.addEventListener(
+    'DOMContentLoaded',
+    loadCatalog
+);
+
+</script>
+
 </body>
-</html>
+</html
