@@ -75,8 +75,10 @@ async function initHiro(loader) {
             loader.loadAsync('./models/laci-hiro-drawer.glb'),
             loader.loadAsync('./models/kaki-hiro-drawer.glb')
         ]);
-        hiroParts.frame = f.scene; hiroParts.drawer = dw.scene;
-        hiroParts.laci = lc.scene; hiroParts.feet = ft.scene;
+        hiroParts.frame = f.scene;
+        hiroParts.drawer = dw.scene;
+        hiroParts.laci = lc.scene;
+        hiroParts.feet = ft.scene;
         modelPrototype = hiroParts.frame;
         modelOriginalBox = new THREE.Box3().setFromObject(hiroParts.frame);
 
